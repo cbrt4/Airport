@@ -8,12 +8,16 @@
             border-collapse: collapse;
             margin: auto;
         }
+
         th, td {
             text-align: center;
             padding: 8px;
         }
 
-        tr:nth-child(even){background-color: #f2f2f2}
+        tr:nth-child(even) {
+            background-color: #f2f2f2
+        }
+
         th {
             background-color: #4CAF50;
             color: white;
@@ -43,7 +47,7 @@
         <%------------------------------------<<    R O W    >>-------------------------------------------------%>
         <tr>
             <td><label>
-                <input type="text" name="flightNumber" value="">
+                <input name="flightNumber" value="">
             </label></td>
 
             <td>
@@ -56,25 +60,25 @@
             </td>
 
             <td><b><label>
-                <input type="text" name="leavingFrom" value="">
+                <input name="leavingFrom" value="">
             </label></b></td>
             <td><b><label>
                 <input type="time" name="leavingTime" value="">
             </label></b></td>
 
             <td><b><label>
-                <input type="text" name="arrivalTo">
+                <input name="arrivalTo">
             </label></b></td>
             <td><label>
                 <input type="time" name="arrivalTime">
             </label></td>
             <td>
-                <button type="submit" name="action" value="add" class="btn btn-primary">
+                <button name="action" value="add" class="btn btn-primary">
                     Confirm
                 </button>
             </td>
             <td>
-                <button type="submit" name="action" value="skip" class="btn btn-danger">
+                <button name="action" value="skip" class="btn btn-danger">
                     Skip all
                 </button>
             </td>

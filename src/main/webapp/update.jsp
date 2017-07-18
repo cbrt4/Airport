@@ -9,12 +9,16 @@
             border-collapse: collapse;
             margin: auto;
         }
+
         th, td {
             text-align: center;
             padding: 8px;
         }
 
-        tr:nth-child(even){background-color: #f2f2f2}
+        tr:nth-child(even) {
+            background-color: #f2f2f2
+        }
+
         th {
             background-color: #4CAF50;
             color: white;
@@ -46,7 +50,7 @@
             <input type="hidden" name="id" value="${item.id}">
             <td>
                 <label>
-                    <input type="text" name="flightNumber" value="${item.flightNumber}">
+                    <input name="flightNumber" value="${item.flightNumber}">
                 </label>
             </td>
 
@@ -60,25 +64,25 @@
             </td>
 
             <td><b><label>
-                <input type="text" name="leavingFrom" value="${item.leavingFrom}">
+                <input name="leavingFrom" value="${item.leavingFrom}">
             </label></b></td>
             <td><b><label>
                 <input type="time" name="leavingTime" value="${item.leavingTime}">
             </label></b></td>
 
             <td><b><label>
-                <input type="text" name="arrivalTo" value="${item.arrivalTo}">
+                <input name="arrivalTo" value="${item.arrivalTo}">
             </label></b></td>
             <td><label>
                 <input type="time" name="arrivalTime" value="${item.arrivalTime}">
             </label></td>
             <td>
-                <button type="submit" name="action" value="update" class="btn btn-primary">
+                <button name="action" value="update" class="btn btn-primary">
                     Update
                 </button>
             </td>
             <td>
-                <button type="submit" name="action" value="skip" class="btn btn-danger">
+                <button name="action" value="skip" class="btn btn-danger">
                     Skip all
                 </button>
             </td>
