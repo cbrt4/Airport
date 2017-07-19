@@ -1,6 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<jsp:useBean id="flight" scope="request" type="entities.FlightEntity"/>
 <html>
 <head><title>Update current flight</title>
     <link type="text/css" rel="stylesheet" href="<c:url value="/css/bootstrap.min.css"/>"/>
@@ -27,40 +26,46 @@
 </head>
 <body style="font-family: 'Noto Sans',serif">
 <h1 align="center">Update current flight</h1>
+<hr>
 <%------------------------------------<<    T A B L E    >>-------------------------------------------------%>
 <form action="update" method="post">
     <table>
         <thead align="center">
-        <tr style="background-color: aquamarine">
+        <tr>
             <th>Flight Number</th>
             <th>Direction</th>
 
-            <th>From</th>
-            <th>Leaving time</th>
+            <th>Waypoint</th>
+            <th>Time</th>
 
-            <th>To</th>
-            <th>Arrival time</th>
+            <th>Terminal</th>
+            <th>Gate</th>
 
-            <th></th>
-            <th></th>
+            <th>Board ID</th>
+
+            <th>Confirm</th>
+            <th>Skip all</th>
         </tr>
         </thead>
         <%------------------------------------<<    R O W    >>-------------------------------------------------%>
+        <jsp:useBean id="flight" scope="request" type="entities.FlightEntity"/>
         <tr>
             <input type="hidden" name="id" value="${flight.id}">
-            <td>
-                <label>
-                    <input name="flightNumber" value="${flight.flightNumber}">
-                </label>
-            </td>
+            <td><label>
+                <input size="10" name="flightNumber" value="${flight.flightNumber}">
+            </label></td>
 
             <td>
                 <label>
+                    <%--<select name="directionType">
+                        <option value="1">Arrive</option>
+                        <option value="0">Leave</option>
+                    </select>--%>
                     <select name="type">
-                        <option value="${flight.directionType}" style="color: ${flight.directionType == 1 ? '#337ab7' : '#d9534f'}">
+                        <option value="${flight.directionType}">
                             ${flight.directionType == 1 ? 'Arriving' : 'Leaving'}
                         </option>
-                        <option value="${flight.directionType == 1 ? 0 : 1}" style="color: ${flight.directionType == 1 ? '#d9534f' : '#337ab7'}">
+                        <option value="${flight.directionType == 1 ? 0 : 1}">
                             ${flight.directionType == 1 ? 'Leaving' : 'Arriving'}
                         </option>
                     </select>
@@ -68,21 +73,24 @@
             </td>
 
             <td><b><label>
-                <input name="leavingFrom" value="${flight.leavingFrom}">
+                <input size="10" name="waypoint" value="${flight.waypoint}">
             </label></b></td>
             <td><b><label>
-                <input type="time" name="leavingTime" value="${flight.leavingTime}">
+                <input type="time" name="time" value="${flight.time}">
             </label></b></td>
 
             <td><b><label>
-                <input name="arrivalTo" value="${flight.arrivalTo}">
+                <input size="1" name="terminal" value="${flight.terminal}">
             </label></b></td>
             <td><label>
-                <input type="time" name="arrivalTime" value="${flight.arrivalTime}">
+                <input type="number" name="gate" value="${flight.gate}">
+            </label></td>
+            <td><label>
+                <input type="number" name="boardId" value="${flight.boardId}">
             </label></td>
             <td>
-                <button name="action" value="update" class="btn btn-primary">
-                    Update
+                <button name="action" value="add" class="btn btn-primary">
+                    Confirm
                 </button>
             </td>
             <td>
@@ -94,8 +102,9 @@
     </table>
 </form>
 
-<p align="center"><a href="info" class="btn btn-primary">Back to info</a></p>
+<hr>
 
+<p align="center"><a href="info" class="btn btn-primary">Back to info</a></p>
 
 </body>
 </html>

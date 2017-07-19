@@ -26,6 +26,7 @@
 </head>
 <body style="font-family: 'Noto Sans',serif">
 <h1 align="center">Add new flight</h1>
+<hr>
 <%------------------------------------<<    T A B L E    >>-------------------------------------------------%>
 <form action="add" method="post">
     <table>
@@ -34,43 +35,48 @@
             <th>Flight Number</th>
             <th>Direction</th>
 
-            <th>From</th>
-            <th>Leaving time</th>
+            <th>Waypoint</th>
+            <th>Time</th>
 
-            <th>To</th>
-            <th>Arrival time</th>
+            <th>Terminal</th>
+            <th>Gate</th>
 
-            <th></th>
-            <th></th>
+            <th>Board ID</th>
+
+            <th>Confirm</th>
+            <th>Skip all</th>
         </tr>
         </thead>
         <%------------------------------------<<    R O W    >>-------------------------------------------------%>
         <tr>
             <td><label>
-                <input name="flightNumber" value="">
+                <input size="10" name="flightNumber" value="">
             </label></td>
 
             <td>
                 <label>
-                    <select name="type">
-                        <option value="1" style="color: #337ab7">Arriving</option>
-                        <option value="0" style="color: #d9534f">Leaving</option>
+                    <select name="directionType">
+                        <option value="1">Arrive</option>
+                        <option value="0">Leave</option>
                     </select>
                 </label>
             </td>
 
             <td><b><label>
-                <input name="leavingFrom" value="">
+                <input size="10" name="waypoint" value="">
             </label></b></td>
             <td><b><label>
-                <input type="time" name="leavingTime" value="">
+                <input type="time" name="time" value="">
             </label></b></td>
 
             <td><b><label>
-                <input name="arrivalTo">
+                <input size="1" name="terminal" value="">
             </label></b></td>
             <td><label>
-                <input type="time" name="arrivalTime">
+                <input type="number" name="gate" value="">
+            </label></td>
+            <td><label>
+                <input type="number" name="boardId" value="">
             </label></td>
             <td>
                 <button name="action" value="add" class="btn btn-primary">
@@ -86,8 +92,9 @@
     </table>
 </form>
 
-<p align="center"><a href="info" class="btn btn-primary">Back to info</a></p>
+<hr>
 
+<p align="center"><a href="info" class="btn btn-primary">Back to info</a></p>
 
 </body>
 </html>

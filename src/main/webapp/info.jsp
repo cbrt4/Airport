@@ -15,6 +15,10 @@
             padding: 8px;
         }
 
+        tr:nth-child(even) {
+            background-color: #f2f2f2
+        }
+
         th {
             background-color: #4CAF50;
             color: white;
@@ -24,13 +28,21 @@
 <body style="font-family: 'Noto Sans',serif">
 <H1 align="center"><a href="info">FLIGHT LIST</a></H1>
 <hr>
+<%--<div>
+    <span><ins></ins>
+
+    </span>
+    <span><ins></ins>
+
+    </span>
+</div>--%>
 <table cellpadding="10" cellspacing="0" align="center" style="border-collapse: collapse">
     <tr align="center">
         <td width=50%>
-            <a href="info?filter=false" class="btn btn-danger">Leaving</a>
+            <a href="info?filter=leave" class="btn btn-danger">Leaving</a>
         </td>
         <td width=50%">
-            <a href="info?filter=true" class="btn btn-primary">Arriving</a>
+            <a href="info?filter=arrive" class="btn btn-primary">Arriving</a>
         </td>
     </tr>
 </table>
@@ -38,15 +50,14 @@
 <%------------------------------------<<    T A B L E    >>-------------------------------------------------%>
 <table>
     <thead>
+    <jsp:useBean id="direction" scope="request" type="java.lang.String"/>
     <tr>
         <th>Flight Number</th>
-        <th>Direction</th>
+        <th>${direction == "leaving" ? 'Destination' : 'Departure'}</th>
 
-        <th>From</th>
-        <th><a href="info?sort=leaving" style="color: white">Leaving time</a></th>
-
-        <th>To</th>
-        <th><a href="info?sort=arrival" style="color: white">Arrival time</a></th>
+        <th>Time</th>
+        <th><a href="info?sort=leaving" style="color: white">Terminal</a></th>
+        <th><a href="info?sort=arrival" style="color: white">Gate</a></th>
 
         <th>Update</th>
         <th>Delete</th>
@@ -56,18 +67,14 @@
     <jsp:useBean id="list" scope="request" type="java.util.List"/>
     <c:forEach var="flight" items="${list}">
         <jsp:useBean id="flight" type="entities.FlightEntity"/>
-
-        <tr align="center" style="background-color:${flight.directionType == 1 ? '#f2f2f2' : 'white'}">
+        <tr align="center">
             <td>${flight.flightNumber}</td>
-            <td style="color:${flight.directionType == 1 ? '#337ab7' : '#d9534f'}">
-                ${flight.directionType == 1 ? 'Arriving' : 'Leaving'}
-            </td>
+            <td>${flight.waypoint}</td>
 
-            <td><b>${flight.leavingFrom}</b></td>
-            <td>${flight.leavingTime}</td>
+            <td>${flight.time}</td>
+            <td>${flight.terminal}</td>
 
-            <td><b>${flight.arrivalTo}</b></td>
-            <td>${flight.arrivalTime}</td>
+            <td>${flight.gate}</td>
 
             <td><a href="update?id=${flight.id}" class="btn btn-primary">Update</a></td>
             <td><a href="delete?id=${flight.id}" class="btn btn-danger">Delete</a></td>
@@ -75,10 +82,9 @@
     </c:forEach>
 </table>
 
-<br>
+<hr>
 
-<p align="center">
-    <a href="add" class="btn btn-primary">Add new flight</a>
+<p align="center"><a href="add" class="btn btn-primary">Add new flight</a>
 </p>
 
 <hr>

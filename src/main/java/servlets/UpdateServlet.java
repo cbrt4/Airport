@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.time.LocalTime;
 import java.util.Objects;
 
@@ -34,21 +35,23 @@ public class UpdateServlet extends HttpServlet {
 
         if (request.getParameter("action").equals("update") &&
                 !Objects.equals(request.getParameter("flightNumber"), "") &&
-                !Objects.equals(request.getParameter("type"), "") &&
-                !Objects.equals(request.getParameter("leavingFrom"), "") &&
-                !Objects.equals(request.getParameter("arrivalTo"), "") &&
-                !Objects.equals(request.getParameter("leavingTime"), "") &&
-                !Objects.equals(request.getParameter("arrivalTime"), "")) {
+                !Objects.equals(request.getParameter("directionType"), "") &&
+                !Objects.equals(request.getParameter("waypoint"), "") &&
+                !Objects.equals(request.getParameter("time"), "") &&
+                !Objects.equals(request.getParameter("terminal"), "") &&
+                !Objects.equals(request.getParameter("gate"), "") &&
+                !Objects.equals(request.getParameter("boardId"), "")) {
 
             FlightEntity flightEntity = new FlightEntity();
 
             flightEntity.setId(Integer.parseInt(request.getParameter("id")));
             flightEntity.setFlightNumber(request.getParameter("flightNumber"));
-            flightEntity.setDirectionType(Byte.parseByte(request.getParameter("type")));
-            flightEntity.setLeavingFrom(request.getParameter("leavingFrom"));
-            flightEntity.setArrivalTo(request.getParameter("arrivalTo"));
-            flightEntity.setLeavingTime(LocalTime.parse(request.getParameter("leavingTime")));
-            flightEntity.setArrivalTime(LocalTime.parse(request.getParameter("arrivalTime")));
+            flightEntity.setDirectionType(Byte.parseByte(request.getParameter("directionType")));
+            flightEntity.setWaypoint(request.getParameter("waypoint"));
+            flightEntity.setTime(LocalTime.parse(request.getParameter("time")));
+            flightEntity.setTerminal(request.getParameter("terminal"));
+            flightEntity.setGate(Integer.parseInt(request.getParameter("gate")));
+            flightEntity.setBoardId(Integer.parseInt(request.getParameter("boardId")));
 
             /*LocalDateTime now = LocalDateTime.now();
             preparedStatement.setTimestamp(5, Timestamp.valueOf(now.with(flightEntity.getLeavingTime())));

@@ -25,7 +25,12 @@ public class InfoServlet extends HttpServlet {
         if (request.getParameter("filter") != null ||
                 request.getParameter("sort") != null) filterSort(request, response);
         else {
-            List<FlightEntity> flightList = repository.getAll();
+            List<FlightEntity> flightList = repository.getAll()
+                    .stream()
+                    .filter(flightEntity -> flightEntity.getDirectionType() == 0)
+                    .sorted(sortByTime)
+                    .collect(Collectors.toList());
+            request.setAttribute("direction", "leaving");
             request.setAttribute("list", flightList);
             request.getRequestDispatcher("info.jsp").forward(request, response);
         }
@@ -36,18 +41,29 @@ public class InfoServlet extends HttpServlet {
 
         String filter = request.getParameter("filter");
 
-        if (filter != null)
-            flightList = flightList.stream()
-                    .filter(flightEntity ->
-                            flightEntity.getDirectionType() == (Boolean.parseBoolean(filter) ? 1 : 0))
-                    .sorted(Boolean.parseBoolean(filter) ? sortByArrivalTime : sortByLeavingTime)
+        if (filter != null && filter.equals("arrive")) {
+            flightList = flightList
+                    .stream()
+                    .filter(flightEntity -> flightEntity.getDirectionType() == 1)
+                    .sorted(sortByTime)
                     .collect(Collectors.toList());
+            request.setAttribute("direction", "arriving");
+        }
+
+        if (filter != null && filter.equals("leave")) {
+            flightList = flightList
+                    .stream()
+                    .filter(flightEntity -> flightEntity.getDirectionType() == 0)
+                    .sorted(sortByTime)
+                    .collect(Collectors.toList());
+            request.setAttribute("direction", "leaving");
+        }
 
         String sort = request.getParameter("sort");
 
         if (sort != null) {
             flightList = flightList.stream()
-                    .sorted(Objects.equals(sort, "arrival") ? sortByArrivalTime : sortByLeavingTime)
+                    .sorted(sortByTime)
                     .collect(Collectors.toList());
         }
 
@@ -55,9 +71,7 @@ public class InfoServlet extends HttpServlet {
         request.getRequestDispatcher("info.jsp").forward(request, response);
     }
 
-    private Comparator<FlightEntity> sortByArrivalTime = Comparator.comparing(FlightEntity::getArrivalTime);
-
-    private Comparator<FlightEntity> sortByLeavingTime = Comparator.comparing(FlightEntity::getLeavingTime);
+    private Comparator<FlightEntity> sortByTime = Comparator.comparing(FlightEntity::getTime);
 
     private Comparator<FlightEntity> sortByFlightNumber = Comparator.comparing(FlightEntity::getFlightNumber);
 }
