@@ -1,5 +1,5 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head><title>Add new flight</title>
     <link type="text/css" rel="stylesheet" href="<c:url value="/css/bootstrap.min.css"/>"/>
@@ -53,8 +53,8 @@
             <td>
                 <label>
                     <select name="type">
-                        <option value="1">Arriving</option>
-                        <option value="0">Leaving</option>
+                        <option value="1" style="color: #337ab7">Arriving</option>
+                        <option value="0" style="color: #d9534f">Leaving</option>
                     </select>
                 </label>
             </td>

@@ -25,7 +25,7 @@ public class UpdateServlet extends HttpServlet {
         int id = Integer.parseInt(request.getParameter("id"));
 
         FlightEntity flightEntity = repository.get(id);
-        request.setAttribute("item", flightEntity);
+        request.setAttribute("flight", flightEntity);
         request.getRequestDispatcher("update.jsp").forward(request, response);
     }
 

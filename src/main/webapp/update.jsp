@@ -1,6 +1,6 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<jsp:useBean id="item" scope="request" type="entities.FlightEntity"/>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<jsp:useBean id="flight" scope="request" type="entities.FlightEntity"/>
 <html>
 <head><title>Update current flight</title>
     <link type="text/css" rel="stylesheet" href="<c:url value="/css/bootstrap.min.css"/>"/>
@@ -47,34 +47,38 @@
         </thead>
         <%------------------------------------<<    R O W    >>-------------------------------------------------%>
         <tr>
-            <input type="hidden" name="id" value="${item.id}">
+            <input type="hidden" name="id" value="${flight.id}">
             <td>
                 <label>
-                    <input name="flightNumber" value="${item.flightNumber}">
+                    <input name="flightNumber" value="${flight.flightNumber}">
                 </label>
             </td>
 
-            <td style="color:${item.directionType == 1 ? 'green' : 'red'}">
+            <td>
                 <label>
                     <select name="type">
-                        <option value="${item.directionType}">${item.directionType == 1 ? 'Arriving' : 'Leaving'}</option>
-                        <option value="${item.directionType == 1 ? 0 : 1}">${item.directionType == 1 ? 'Leaving' : 'Arriving'}</option>
+                        <option value="${flight.directionType}" style="color: ${flight.directionType == 1 ? '#337ab7' : '#d9534f'}">
+                            ${flight.directionType == 1 ? 'Arriving' : 'Leaving'}
+                        </option>
+                        <option value="${flight.directionType == 1 ? 0 : 1}" style="color: ${flight.directionType == 1 ? '#d9534f' : '#337ab7'}">
+                            ${flight.directionType == 1 ? 'Leaving' : 'Arriving'}
+                        </option>
                     </select>
                 </label>
             </td>
 
             <td><b><label>
-                <input name="leavingFrom" value="${item.leavingFrom}">
+                <input name="leavingFrom" value="${flight.leavingFrom}">
             </label></b></td>
             <td><b><label>
-                <input type="time" name="leavingTime" value="${item.leavingTime}">
+                <input type="time" name="leavingTime" value="${flight.leavingTime}">
             </label></b></td>
 
             <td><b><label>
-                <input name="arrivalTo" value="${item.arrivalTo}">
+                <input name="arrivalTo" value="${flight.arrivalTo}">
             </label></b></td>
             <td><label>
-                <input type="time" name="arrivalTime" value="${item.arrivalTime}">
+                <input type="time" name="arrivalTime" value="${flight.arrivalTime}">
             </label></td>
             <td>
                 <button name="action" value="update" class="btn btn-primary">

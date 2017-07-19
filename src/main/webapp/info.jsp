@@ -24,23 +24,16 @@
 <body style="font-family: 'Noto Sans',serif">
 <H1 align="center"><a href="info">FLIGHT LIST</a></H1>
 <hr>
-
-<form action="info" method="post">
-    <table cellpadding="10" cellspacing="0" align="center" style="border-collapse: collapse">
-        <tr align="center">
-            <td width=50%>
-                <button name="filter" value="false" class="btn btn-danger">
-                    Leaving
-                </button>
-            </td>
-            <td width=50%">
-                <button name="filter" value="true" class="btn btn-primary">
-                    Arriving
-                </button>
-            </td>
-        </tr>
-    </table>
-</form>
+<table cellpadding="10" cellspacing="0" align="center" style="border-collapse: collapse">
+    <tr align="center">
+        <td width=50%>
+            <a href="info?filter=false" class="btn btn-danger">Leaving</a>
+        </td>
+        <td width=50%">
+            <a href="info?filter=true" class="btn btn-primary">Arriving</a>
+        </td>
+    </tr>
+</table>
 <hr>
 <%------------------------------------<<    T A B L E    >>-------------------------------------------------%>
 <table>
@@ -50,10 +43,10 @@
         <th>Direction</th>
 
         <th>From</th>
-        <th><a href="info?&sort=leaving" style="color: white">Leaving time</a></th>
+        <th><a href="info?sort=leaving" style="color: white">Leaving time</a></th>
 
         <th>To</th>
-        <th><a href="info?&sort=arrival" style="color: white">Arrival time</a></th>
+        <th><a href="info?sort=arrival" style="color: white">Arrival time</a></th>
 
         <th>Update</th>
         <th>Delete</th>
@@ -66,8 +59,8 @@
 
         <tr align="center" style="background-color:${flight.directionType == 1 ? '#f2f2f2' : 'white'}">
             <td>${flight.flightNumber}</td>
-            <td>
-                <b style="color:${flight.directionType ==1 ? '#337ab7' : '#d9534f'}">${flight.directionType == 1 ? 'Arriving': 'Leaving'}</b>
+            <td style="color:${flight.directionType == 1 ? '#337ab7' : '#d9534f'}">
+                ${flight.directionType == 1 ? 'Arriving' : 'Leaving'}
             </td>
 
             <td><b>${flight.leavingFrom}</b></td>
@@ -76,8 +69,8 @@
             <td><b>${flight.arrivalTo}</b></td>
             <td>${flight.arrivalTime}</td>
 
-            <td><a href="update?&id=${flight.id}" class="btn btn-primary">Update</a></td>
-            <td><a href="delete?&id=${flight.id}" class="btn btn-danger">Delete</a></td>
+            <td><a href="update?id=${flight.id}" class="btn btn-primary">Update</a></td>
+            <td><a href="delete?id=${flight.id}" class="btn btn-danger">Delete</a></td>
         </tr>
     </c:forEach>
 </table>
