@@ -1,6 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<jsp:useBean id="direction" scope="request" class="java.lang.String"/>
+<jsp:useBean id="list" scope="request" type="java.util.List"/>
+<jsp:useBean id="flight" scope="request" class="entities.FlightEntity"/>
 <html>
 <head><title>Airport-Title</title>
     <link type="text/css" rel="stylesheet" href="<c:url value="/css/bootstrap.min.css"/>"/>
@@ -28,49 +31,39 @@
 <body style="font-family: 'Noto Sans',serif">
 <H1 align="center"><a href="info">FLIGHT LIST</a></H1>
 <hr>
-<%--<div>
-    <span><ins></ins>
 
-    </span>
-    <span><ins></ins>
-
-    </span>
-</div>--%>
-<jsp:useBean id="direction" scope="request" type="java.lang.String"/>
 <table cellpadding="10" cellspacing="0" align="center" style="border-collapse: collapse">
     <tr align="center">
-        <td width=50%>
-            <a href="info?filter=leave" class="${direction == "leaving" ? 'btn btn-primary' : 'btn btn-default'}">Leaving</a>
-        </td>
         <td width=50%">
             <a href="info?filter=arrive" class="${direction == "arriving" ? 'btn btn-primary' : 'btn btn-default'}">Arriving</a>
         </td>
+        <td width=50%>
+            <a href="info?filter=leave" class="${direction == "leaving" ? 'btn btn-primary' : 'btn btn-default'}">Leaving</a>
+        </td>
+
     </tr>
 </table>
 <hr>
 <%------------------------------------<<    T A B L E    >>-------------------------------------------------%>
 <table>
     <thead>
-    <%--<jsp:useBean id="direction" scope="request" type="java.lang.String"/>--%>
     <tr>
         <th>Time</th>
-        <th>Flight Number</th>
-        <th>${direction == "leaving" ? 'Destination' : 'Departure'}</th>
-        <th><a href="info?sort=leaving" style="color: white">Terminal</a></th>
-        <th><a href="info?sort=arrival" style="color: white">Gate</a></th>
+        <th><a href="info?filter=${direction == "leaving" ? 'leave' : 'arrive'}&sort=flightNumber" style="color: white">Flight Number</a></th>
+        <th><a href="info?filter=${direction == "leaving" ? 'leave' : 'arrive'}&sort=waypoint" style="color: white">${direction == "leaving" ? 'Destination' : 'Departure'}</a></th>
+        <th><a href="info?filter=${direction == "leaving" ? 'leave' : 'arrive'}&sort=terminal" style="color: white">Terminal</a></th>
+        <th><a href="info?filter=${direction == "leaving" ? 'leave' : 'arrive'}&sort=gate" style="color: white">Gate</a></th>
 
         <th>Update</th>
         <th>Delete</th>
     </tr>
     </thead>
 
-    <jsp:useBean id="list" scope="request" type="java.util.List"/>
     <c:forEach var="flight" items="${list}">
-        <jsp:useBean id="flight" type="entities.FlightEntity"/>
         <tr align="center">
             <td>${flight.time}</td>
             <td>${flight.flightNumber}</td>
-            <td>${flight.waypoint}</td>
+            <td><b>${flight.waypoint}</b></td>
             <td>${flight.terminal}</td>
             <td>${flight.gate}</td>
 

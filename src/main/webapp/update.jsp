@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<jsp:useBean id="flight" scope="request" class="entities.FlightEntity"/>
 <html>
 <head><title>Update current flight</title>
     <link type="text/css" rel="stylesheet" href="<c:url value="/css/bootstrap.min.css"/>"/>
@@ -48,7 +49,6 @@
         </tr>
         </thead>
         <%------------------------------------<<    R O W    >>-------------------------------------------------%>
-        <jsp:useBean id="flight" scope="request" type="entities.FlightEntity"/>
         <tr>
             <input type="hidden" name="id" value="${flight.id}">
 
@@ -61,12 +61,8 @@
 
             <td>
                 <label>
-                    <%--<select name="directionType">
-                        <option value="1">Arrive</option>
-                        <option value="0">Leave</option>
-                    </select>--%>
-                    <select name="type">
-                        <option value="${flight.directionType}">
+                    <select name="directionType">
+                        <option value="${flight.directionType == 1 ? 1 : 0}">
                             ${flight.directionType == 1 ? 'Arriving' : 'Leaving'}
                         </option>
                         <option value="${flight.directionType == 1 ? 0 : 1}">
@@ -91,7 +87,7 @@
             </label></td>
 
             <td>
-                <button name="action" value="add" class="btn btn-primary">
+                <button name="action" value="update" class="btn btn-primary">
                     Confirm
                 </button>
             </td>

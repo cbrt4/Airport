@@ -19,6 +19,16 @@ public class InfoServlet extends HttpServlet {
 
     private FlightRepository repository = new FlightRepository();
 
+    private Comparator<FlightEntity> sortByTime = Comparator.comparing(FlightEntity::getTime);
+
+    private Comparator<FlightEntity> sortByFlightNumber = Comparator.comparing(FlightEntity::getFlightNumber);
+
+    private Comparator<FlightEntity> sortByWaypoint = Comparator.comparing(FlightEntity::getWaypoint);
+
+    private Comparator<FlightEntity> sortByTerminal = Comparator.comparing(FlightEntity::getTerminal);
+
+    private Comparator<FlightEntity> sortByGate = Comparator.comparing(FlightEntity::getGate);
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
@@ -61,17 +71,31 @@ public class InfoServlet extends HttpServlet {
 
         String sort = request.getParameter("sort");
 
-        if (sort != null) {
+        if (sort != null && sort.equals("flightNumber")) {
             flightList = flightList.stream()
-                    .sorted(sortByTime)
+                    .sorted(sortByFlightNumber)
+                    .collect(Collectors.toList());
+        }
+
+        if (sort != null && sort.equals("waypoint")) {
+            flightList = flightList.stream()
+                    .sorted(sortByWaypoint)
+                    .collect(Collectors.toList());
+        }
+
+        if (sort != null && sort.equals("terminal")) {
+            flightList = flightList.stream()
+                    .sorted(sortByTerminal)
+                    .collect(Collectors.toList());
+        }
+
+        if (sort != null && sort.equals("gate")) {
+            flightList = flightList.stream()
+                    .sorted(sortByGate)
                     .collect(Collectors.toList());
         }
 
         request.setAttribute("list", flightList);
         request.getRequestDispatcher("info.jsp").forward(request, response);
     }
-
-    private Comparator<FlightEntity> sortByTime = Comparator.comparing(FlightEntity::getTime);
-
-    private Comparator<FlightEntity> sortByFlightNumber = Comparator.comparing(FlightEntity::getFlightNumber);
 }
