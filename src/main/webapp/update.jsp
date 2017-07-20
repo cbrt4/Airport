@@ -32,11 +32,11 @@
     <table>
         <thead align="center">
         <tr>
-            <th>Flight Number</th>
-            <th>Direction</th>
-
-            <th>Waypoint</th>
             <th>Time</th>
+            <th>Flight Number</th>
+
+            <th>Direction</th>
+            <th>Waypoint</th>
 
             <th>Terminal</th>
             <th>Gate</th>
@@ -51,6 +51,10 @@
         <jsp:useBean id="flight" scope="request" type="entities.FlightEntity"/>
         <tr>
             <input type="hidden" name="id" value="${flight.id}">
+
+            <td><b><label>
+                <input type="time" name="time" value="${flight.time}">
+            </label></b></td>
             <td><label>
                 <input size="10" name="flightNumber" value="${flight.flightNumber}">
             </label></td>
@@ -76,18 +80,16 @@
                 <input size="10" name="waypoint" value="${flight.waypoint}">
             </label></b></td>
             <td><b><label>
-                <input type="time" name="time" value="${flight.time}">
-            </label></b></td>
-
-            <td><b><label>
                 <input size="1" name="terminal" value="${flight.terminal}">
             </label></b></td>
+
             <td><label>
                 <input type="number" name="gate" value="${flight.gate}">
             </label></td>
             <td><label>
                 <input type="number" name="boardId" value="${flight.boardId}">
             </label></td>
+
             <td>
                 <button name="action" value="add" class="btn btn-primary">
                     Confirm

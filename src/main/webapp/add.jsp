@@ -32,11 +32,11 @@
     <table>
         <thead align="center">
         <tr>
-            <th>Flight Number</th>
-            <th>Direction</th>
-
-            <th>Waypoint</th>
             <th>Time</th>
+            <th>Flight Number</th>
+
+            <th>Direction</th>
+            <th>Waypoint</th>
 
             <th>Terminal</th>
             <th>Gate</th>
@@ -49,6 +49,10 @@
         </thead>
         <%------------------------------------<<    R O W    >>-------------------------------------------------%>
         <tr>
+
+            <td><b><label>
+                <input type="time" name="time" value="">
+            </label></b></td>
             <td><label>
                 <input size="10" name="flightNumber" value="">
             </label></td>
@@ -66,10 +70,6 @@
                 <input size="10" name="waypoint" value="">
             </label></b></td>
             <td><b><label>
-                <input type="time" name="time" value="">
-            </label></b></td>
-
-            <td><b><label>
                 <input size="1" name="terminal" value="">
             </label></b></td>
             <td><label>
@@ -78,6 +78,7 @@
             <td><label>
                 <input type="number" name="boardId" value="">
             </label></td>
+
             <td>
                 <button name="action" value="add" class="btn btn-primary">
                     Confirm

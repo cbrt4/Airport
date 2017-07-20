@@ -36,13 +36,14 @@
 
     </span>
 </div>--%>
+<jsp:useBean id="direction" scope="request" type="java.lang.String"/>
 <table cellpadding="10" cellspacing="0" align="center" style="border-collapse: collapse">
     <tr align="center">
         <td width=50%>
-            <a href="info?filter=leave" class="btn btn-danger">Leaving</a>
+            <a href="info?filter=leave" class="${direction == "leaving" ? 'btn btn-primary' : 'btn btn-default'}">Leaving</a>
         </td>
         <td width=50%">
-            <a href="info?filter=arrive" class="btn btn-primary">Arriving</a>
+            <a href="info?filter=arrive" class="${direction == "arriving" ? 'btn btn-primary' : 'btn btn-default'}">Arriving</a>
         </td>
     </tr>
 </table>
@@ -50,12 +51,11 @@
 <%------------------------------------<<    T A B L E    >>-------------------------------------------------%>
 <table>
     <thead>
-    <jsp:useBean id="direction" scope="request" type="java.lang.String"/>
+    <%--<jsp:useBean id="direction" scope="request" type="java.lang.String"/>--%>
     <tr>
+        <th>Time</th>
         <th>Flight Number</th>
         <th>${direction == "leaving" ? 'Destination' : 'Departure'}</th>
-
-        <th>Time</th>
         <th><a href="info?sort=leaving" style="color: white">Terminal</a></th>
         <th><a href="info?sort=arrival" style="color: white">Gate</a></th>
 
@@ -68,12 +68,10 @@
     <c:forEach var="flight" items="${list}">
         <jsp:useBean id="flight" type="entities.FlightEntity"/>
         <tr align="center">
+            <td>${flight.time}</td>
             <td>${flight.flightNumber}</td>
             <td>${flight.waypoint}</td>
-
-            <td>${flight.time}</td>
             <td>${flight.terminal}</td>
-
             <td>${flight.gate}</td>
 
             <td><a href="update?id=${flight.id}" class="btn btn-primary">Update</a></td>
