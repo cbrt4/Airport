@@ -12,7 +12,6 @@ import java.io.IOException;
 @WebServlet("/delete")
 public class DeleteServlet extends HttpServlet {
 
-    //TODO: Spring!
     private FlightRepository repository = new FlightRepository();
 
     @Override

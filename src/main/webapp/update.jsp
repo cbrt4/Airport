@@ -33,15 +33,16 @@
     <table>
         <thead align="center">
         <tr>
+            <th>Date</th>
             <th>Time</th>
+
             <th>Flight Number</th>
-
             <th>Direction</th>
+
             <th>Waypoint</th>
-
             <th>Terminal</th>
-            <th>Gate</th>
 
+            <th>Gate</th>
             <th>Board ID</th>
 
             <th>Confirm</th>
@@ -52,13 +53,15 @@
         <tr>
             <input type="hidden" name="id" value="${flight.id}">
 
-            <td><b><label>
+            <td><label>
+                <input type="date" name="date" value="${flight.date}">
+            </label></td>
+            <td><label>
                 <input type="time" name="time" value="${flight.time}">
-            </label></b></td>
+            </label></td>
             <td><label>
                 <input size="10" name="flightNumber" value="${flight.flightNumber}">
             </label></td>
-
             <td>
                 <label>
                     <select name="directionType">
@@ -72,18 +75,17 @@
                 </label>
             </td>
 
-            <td><b><label>
-                <input size="10" name="waypoint" value="${flight.waypoint}">
-            </label></b></td>
-            <td><b><label>
-                <input size="1" name="terminal" value="${flight.terminal}">
-            </label></b></td>
-
             <td><label>
-                <input type="number" name="gate" value="${flight.gate}">
+                <input size="10" name="waypoint" value="${flight.waypoint}">
             </label></td>
             <td><label>
-                <input type="number" name="boardId" value="${flight.boardId}">
+                <input size="1" name="terminal" value="${flight.terminal}">
+            </label></td>
+            <td><label>
+                <input type="number" min="1" max="999" name="gate" value="${flight.gate}">
+            </label></td>
+            <td><label>
+                <input type="number" min="1" max="999" name="boardId" value="${flight.boardId}">
             </label></td>
 
             <td>

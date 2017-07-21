@@ -32,15 +32,16 @@
     <table>
         <thead align="center">
         <tr>
+            <th>Date</th>
             <th>Time</th>
+
             <th>Flight Number</th>
-
             <th>Direction</th>
+
             <th>Waypoint</th>
-
             <th>Terminal</th>
-            <th>Gate</th>
 
+            <th>Gate</th>
             <th>Board ID</th>
 
             <th>Confirm</th>
@@ -49,14 +50,15 @@
         </thead>
         <%------------------------------------<<    R O W    >>-------------------------------------------------%>
         <tr>
-
-            <td><b><label>
+            <td><label>
+                <input type="date" name="date" value="">
+            </label></td>
+            <td><label>
                 <input type="time" name="time" value="">
-            </label></b></td>
+            </label></td>
             <td><label>
                 <input size="10" name="flightNumber" value="">
             </label></td>
-
             <td>
                 <label>
                     <select name="directionType">
@@ -65,18 +67,17 @@
                     </select>
                 </label>
             </td>
-
-            <td><b><label>
-                <input size="10" name="waypoint" value="">
-            </label></b></td>
-            <td><b><label>
-                <input size="1" name="terminal" value="">
-            </label></b></td>
             <td><label>
-                <input type="number" name="gate" value="">
+                <input size="10" name="waypoint" value="">
             </label></td>
             <td><label>
-                <input type="number" name="boardId" value="">
+                <input size="1" name="terminal" value="">
+            </label></td>
+            <td><label>
+                <input type="number" min="1" max="999" name="gate" value="">
+            </label></td>
+            <td><label>
+                <input type="number" min="1" max="999" name="boardId" value="">
             </label></td>
 
             <td>
