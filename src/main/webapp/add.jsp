@@ -50,15 +50,21 @@
         </thead>
         <%------------------------------------<<    R O W    >>-------------------------------------------------%>
         <tr>
-            <td><label>
-                <input type="date" name="date" value="">
-            </label></td>
-            <td><label>
-                <input type="time" name="time" value="">
-            </label></td>
-            <td><label>
-                <input size="10" name="flightNumber" value="">
-            </label></td>
+            <td>
+                <label>
+                    <input type="date" name="date" value="">
+                </label>
+            </td>
+            <td>
+                <label>
+                    <input type="time" name="time" value="">
+                </label>
+            </td>
+            <td>
+                <label>
+                    <input size="10" name="flightNumber" value="">
+                </label>
+            </td>
             <td>
                 <label>
                     <select name="directionType">
@@ -67,18 +73,26 @@
                     </select>
                 </label>
             </td>
-            <td><label>
-                <input size="10" name="waypoint" value="">
-            </label></td>
-            <td><label>
-                <input size="1" name="terminal" value="">
-            </label></td>
-            <td><label>
-                <input type="number" min="1" max="999" name="gate" value="">
-            </label></td>
-            <td><label>
-                <input type="number" min="1" max="999" name="boardId" value="">
-            </label></td>
+            <td>
+                <label>
+                    <input size="10" name="waypoint" value="">
+                </label>
+            </td>
+            <td>
+                <label>
+                    <input size="1" name="terminal" value="">
+                </label>
+            </td>
+            <td>
+                <label>
+                    <input type="number" min="1" max="999" name="gate" value="">
+                </label>
+            </td>
+            <td>
+                <label>
+                    <input type="number" min="1" max="999" name="boardId" value="">
+                </label>
+            </td>
 
             <td>
                 <button name="action" value="add" class="btn btn-primary">
@@ -98,12 +112,6 @@
 
 <p align="center">
     <a href="admin" class="btn btn-primary">Back to admin page</a>
-</p>
-
-<hr>
-
-<p align="center">
-    <a href="info" class="btn btn-danger">Back to info</a>
 </p>
 
 <hr>

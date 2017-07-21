@@ -110,11 +110,5 @@
 
 <hr>
 
-<p align="center">
-    <a href="info" class="btn btn-danger">Back to info</a>
-</p>
-
-<hr>
-
 </body>
 </html>

@@ -31,6 +31,33 @@
 <body>
 <h1 align="center"><a href="admin">Admin page</a></h1>
 <hr>
+<form action="admin" method="post">
+    <%--left--%>
+    <p align="center"><b>Direction filter: </b>
+        <label>
+            <select name="directionType">
+                <option value="">All</option>
+                <option value="1">Arrival</option>
+                <option value="0">Leaving</option>
+            </select>
+        </label>
+    </p>
+    <%--right--%>
+    <p align="center"><b>Date filter: </b>
+        <label>
+            <input type="date" name="date" value="">
+        </label>
+    </p>
+    <p align="center">
+        <button name="action" value="filter" class="btn btn-primary">
+            Confirm
+        </button>
+        <button name="action" value="skip" class="btn btn-danger">
+            Skip all
+        </button>
+    </p>
+</form>
+<hr>
 <table>
     <thead align="center">
     <tr>
