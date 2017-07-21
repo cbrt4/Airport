@@ -17,6 +17,8 @@ import java.util.stream.Collectors;
 @WebServlet("/info")
 public class InfoServlet extends HttpServlet {
 
+    //TODO: simplify filterSort() method!!!
+
     private FlightRepository repository = new FlightRepository();
 
     private Comparator<FlightEntity> sortByTime = Comparator.comparing(FlightEntity::getTime);

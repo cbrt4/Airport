@@ -96,7 +96,17 @@
 
 <hr>
 
-<p align="center"><a href="info" class="btn btn-primary">Back to info</a></p>
+<p align="center">
+    <a href="admin" class="btn btn-primary">Back to admin page</a>
+</p>
+
+<hr>
+
+<p align="center">
+    <a href="info" class="btn btn-danger">Back to info</a>
+</p>
+
+<hr>
 
 </body>
 </html>
