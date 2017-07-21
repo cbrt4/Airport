@@ -23,4 +23,9 @@ public class AdminServlet extends HttpServlet {
         request.setAttribute("list", flightList);
         request.getRequestDispatcher("admin.jsp").forward(request, response);
     }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        //TODO: filterSort() method needed here!
+    }
 }

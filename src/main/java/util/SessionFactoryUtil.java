@@ -13,7 +13,7 @@ public class SessionFactoryUtil {
         T execute(Session session);
     }
 
-    public  static <T> T transaction(Executor<T> executor) {
+    public static <T> T transaction(Executor<T> executor) {
         Session session = getSessionFactory().openSession();
         Transaction transaction = session.beginTransaction();
         try {

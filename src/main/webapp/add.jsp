@@ -62,8 +62,8 @@
             <td>
                 <label>
                     <select name="directionType">
-                        <option value="1">Arrive</option>
-                        <option value="0">Leave</option>
+                        <option value="1">Arrival</option>
+                        <option value="0">Leaving</option>
                     </select>
                 </label>
             </td>

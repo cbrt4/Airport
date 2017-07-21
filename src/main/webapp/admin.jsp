@@ -56,7 +56,7 @@
             <td>${flight.time}</td>
 
             <td>${flight.flightNumber}</td>
-            <td>${flight.directionType == 1 ? 'arrive from' : 'leaving to'}</td>
+            <td>${flight.directionType == 1 ? 'arrival from' : 'living to'}</td>
 
             <td>${flight.waypoint}</td>
             <td>${flight.terminal}</td>

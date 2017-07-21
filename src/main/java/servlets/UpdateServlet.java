@@ -57,6 +57,6 @@ public class UpdateServlet extends HttpServlet {
             repository.update(flightEntity);
         } else doGet(request, response);
 
-        response.sendRedirect("info");
+        response.sendRedirect("admin");
     }
 }

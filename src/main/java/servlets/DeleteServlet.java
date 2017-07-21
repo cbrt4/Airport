@@ -20,6 +20,6 @@ public class DeleteServlet extends HttpServlet {
 
         int id = Integer.parseInt(request.getParameter("id"));
         repository.remove(id);
-        response.sendRedirect("info");
+        response.sendRedirect("admin");
     }
 }
