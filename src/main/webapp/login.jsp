@@ -6,7 +6,7 @@
     <link type="text/css" rel="stylesheet" href="<c:url value="/css/bootstrap.min.css"/>"/>
 </head>
 <body>
-<h1 align="center">Authorization needed</h1>
+<h1 align="center">Authorization required</h1>
 <hr>
 <form action="login" method="post">
     <p align="center">

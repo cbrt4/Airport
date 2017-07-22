@@ -21,13 +21,17 @@ public class AdminServlet extends HttpServlet {
 
     private FlightRepository repository = new FlightRepository();
 
+    private Comparator<FlightEntity> sortByDate = Comparator.comparing(FlightEntity::getDate);
     private Comparator<FlightEntity> sortByTime = Comparator.comparing(FlightEntity::getTime);
     private Comparator<FlightEntity> sortByFlightNumber = Comparator.comparing(FlightEntity::getFlightNumber);
+    private Comparator<FlightEntity> sortByDirection = Comparator.comparing(FlightEntity::getDirectionType);
     private Comparator<FlightEntity> sortByWaypoint = Comparator.comparing(FlightEntity::getWaypoint);
     private Comparator<FlightEntity> sortByTerminal = Comparator.comparing(FlightEntity::getTerminal);
+    private Comparator<FlightEntity> sortByBoard = Comparator.comparing(FlightEntity::getBoardId);
+
 
     private Predicate<FlightEntity> directionFilter(final int directionType) {
-        return flightEntity -> flightEntity.getDirectionType() == directionType;
+        return flightEntity -> flightEntity.getDirectionType() != directionType;
     }
     private Predicate<FlightEntity> dateFilter(final LocalDate beginDate, final LocalDate endDate) {
         return flightEntity -> beginDate.minusDays(1).isBefore(flightEntity.getDate()) && endDate.plusDays(1).isAfter(flightEntity.getDate());
@@ -63,7 +67,7 @@ public class AdminServlet extends HttpServlet {
 
         flightList = flightList
                 .stream()
-                .filter(!direction.equals("") ? directionFilter(Byte.parseByte(direction)) : dateFilter(LocalDate.parse(beginDate), LocalDate.parse(endDate)))
+                .filter(directionFilter(Byte.parseByte(direction)))
                 .filter(!(beginDate.equals("") && endDate.equals("")) ? dateFilter(LocalDate.parse(beginDate), LocalDate.parse(endDate)) : directionFilter(Byte.parseByte(direction)))
                 .collect(Collectors.toList());
 
@@ -72,6 +76,16 @@ public class AdminServlet extends HttpServlet {
     }
 
     private void sort(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        List<FlightEntity> flightList = repository.getAll();
+
         String sort = request.getParameter("sort");
+
+        flightList = flightList
+                .stream()
+                .sorted(sort.equals("date") ? sortByDate : (sort.equals("time") ? sortByTime : (sort.equals("flightNumber") ? sortByFlightNumber : (sort.equals("direction") ? sortByDirection : (sort.equals("waypoint") ? sortByWaypoint : (sort.equals("terminal") ? sortByTerminal : sortByBoard))))))
+                .collect(Collectors.toList());
+
+        request.setAttribute("list", flightList);
+        request.getRequestDispatcher("admin.jsp").forward(request, response);
     }
 }

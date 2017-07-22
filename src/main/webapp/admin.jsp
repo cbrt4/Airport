@@ -1,4 +1,3 @@
-<%@ page import="java.time.LocalDate" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -37,9 +36,9 @@
     <p align="center"><b>Direction filter: </b>
         <label>
             <select name="directionType">
-                <option value="">All</option>
-                <option value="1">Arrival</option>
-                <option value="0">Leaving</option>
+                <option value="-1">All</option>
+                <option value="0">Arrival</option>
+                <option value="1">Leaving</option>
             </select>
         </label>
     </p>
@@ -47,11 +46,11 @@
     <p align="center">
         <b>Begin date: </b>
         <label>
-            <input type="date" name="beginDate" value="<%=LocalDate.now()%>">
+            <input type="date" name="beginDate" value="">
         </label>
         <b>End date: </b>
         <label>
-            <input type="date" name="endDate" value="<%=LocalDate.now()%>">
+            <input type="date" name="endDate" value="">
         </label>
     </p>
     <p align="center">
@@ -67,16 +66,23 @@
 <table>
     <thead align="center">
     <tr>
-        <th>Date</th>
-        <th>Time</th>
+        <th><a href="admin?sort=date"
+               style="color: white">Date</a></th>
+        <th><a href="admin?sort=time"
+               style="color: white">Time</a></th>
 
-        <th>Flight Number</th>
-        <th>Direction</th>
+        <th><a href="admin?sort=flightNumber"
+               style="color: white">Flight Number</a></th>
+        <th><a href="admin?sort=direction"
+               style="color: white">Direction</a></th>
 
-        <th>Waypoint</th>
-        <th>Terminal</th>
+        <th><a href="admin?sort=waypoint"
+               style="color: white">Waypoint</a></th>
+        <th><a href="admin?sort=terminal"
+               style="color: white">Terminal</a></th>
 
-        <th>Board ID</th>
+        <th><a href="admin?sort=board"
+               style="color: white">Board ID</a></th>
 
         <th>Update</th>
         <th>Delete</th>
