@@ -83,10 +83,6 @@
             <a href="info?directionFilter=${direction == "leaving" ? 'leave' : 'arrive'}&dateFilter=${date == "today" ? 'today' : (date == "yesterday" ? 'yesterday' : 'tomorrow')}&sort=terminal"
                style="color: white">Terminal</a>
         </th>
-        <th>
-            <a href="info?directionFilter=${direction == "leaving" ? 'leave' : 'arrive'}&dateFilter=${date == "today" ? 'today' : (date == "yesterday" ? 'yesterday' : 'tomorrow')}&sort=gate"
-               style="color: white">Gate</a>
-        </th>
 
     </tr>
     </thead>
@@ -97,7 +93,6 @@
             <td>${flight.flightNumber}</td>
             <td><b>${flight.waypoint}</b></td>
             <td>${flight.terminal}</td>
-            <td>${flight.gate}</td>
         </tr>
     </c:forEach>
 </table>

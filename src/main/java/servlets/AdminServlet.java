@@ -2,12 +2,11 @@ package servlets;
 
 import entities.FlightEntity;
 import repository.FlightRepository;
+import util.AdminValidator;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.*;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Comparator;
@@ -18,13 +17,14 @@ import java.util.stream.Collectors;
 @WebServlet("/admin")
 public class AdminServlet extends HttpServlet {
 
+    private AdminValidator validator = new AdminValidator();
+
     private FlightRepository repository = new FlightRepository();
 
     private Comparator<FlightEntity> sortByTime = Comparator.comparing(FlightEntity::getTime);
     private Comparator<FlightEntity> sortByFlightNumber = Comparator.comparing(FlightEntity::getFlightNumber);
     private Comparator<FlightEntity> sortByWaypoint = Comparator.comparing(FlightEntity::getWaypoint);
     private Comparator<FlightEntity> sortByTerminal = Comparator.comparing(FlightEntity::getTerminal);
-    private Comparator<FlightEntity> sortByGate = Comparator.comparing(FlightEntity::getGate);
 
     private Predicate<FlightEntity> directionFilter(final int directionType) {
         return flightEntity -> flightEntity.getDirectionType() == directionType;
@@ -35,6 +35,10 @@ public class AdminServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        if (!validator.validate(request))
+            request.getRequestDispatcher("login.jsp").forward(request, response);
+
         List<FlightEntity> flightList = repository.getAll();
 
         if (request.getParameter("sort") != null) sort(request, response);
@@ -58,8 +62,8 @@ public class AdminServlet extends HttpServlet {
 
         flightList = flightList
                 .stream()
-                .filter(!direction.equals("") ? directionFilter(Integer.parseInt(direction)) : dateFilter(LocalDate.parse(date)))
-                .filter(!date.equals("") ? dateFilter(LocalDate.parse(date)) : directionFilter(Integer.parseInt(direction)))
+                .filter(!direction.equals("") ? directionFilter(Byte.parseByte(direction)) : dateFilter(LocalDate.parse(date)))
+                .filter(!date.equals("") ? dateFilter(LocalDate.parse(date)) : directionFilter(Byte.parseByte(direction)))
                 .collect(Collectors.toList());
 
         request.setAttribute("list", flightList);

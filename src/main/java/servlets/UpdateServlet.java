@@ -2,6 +2,7 @@ package servlets;
 
 import entities.FlightEntity;
 import repository.FlightRepository;
+import util.AdminValidator;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,11 +17,16 @@ import java.util.Objects;
 @WebServlet("/update")
 public class UpdateServlet extends HttpServlet {
 
+    private AdminValidator validator = new AdminValidator();
+
     private FlightRepository repository = new FlightRepository();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
+
+        if (!validator.validate(request))
+            request.getRequestDispatcher("login.jsp").forward(request, response);
 
         int id = Integer.parseInt(request.getParameter("id"));
 
@@ -39,7 +45,6 @@ public class UpdateServlet extends HttpServlet {
                 !Objects.equals(request.getParameter("directionType"), "") &&
                 !Objects.equals(request.getParameter("waypoint"), "") &&
                 !Objects.equals(request.getParameter("terminal"), "") &&
-                !Objects.equals(request.getParameter("gate"), "") &&
                 !Objects.equals(request.getParameter("boardId"), "")) {
 
             FlightEntity flightEntity = new FlightEntity();
@@ -51,7 +56,6 @@ public class UpdateServlet extends HttpServlet {
             flightEntity.setDirectionType(Byte.parseByte(request.getParameter("directionType")));
             flightEntity.setWaypoint(request.getParameter("waypoint"));
             flightEntity.setTerminal(request.getParameter("terminal"));
-            flightEntity.setGate(Integer.parseInt(request.getParameter("gate")));
             flightEntity.setBoardId(Integer.parseInt(request.getParameter("boardId")));
 
             repository.update(flightEntity);

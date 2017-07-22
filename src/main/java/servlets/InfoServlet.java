@@ -24,7 +24,6 @@ public class InfoServlet extends HttpServlet {
     private Comparator<FlightEntity> sortByFlightNumber = Comparator.comparing(FlightEntity::getFlightNumber);
     private Comparator<FlightEntity> sortByWaypoint = Comparator.comparing(FlightEntity::getWaypoint);
     private Comparator<FlightEntity> sortByTerminal = Comparator.comparing(FlightEntity::getTerminal);
-    private Comparator<FlightEntity> sortByGate = Comparator.comparing(FlightEntity::getGate);
 
     private Predicate<FlightEntity> directionFilter(final int directionType) {
         return flightEntity -> flightEntity.getDirectionType() == directionType;
@@ -68,8 +67,8 @@ public class InfoServlet extends HttpServlet {
         flightList = flightList
                 .stream()
                 .filter(directionFilter.equals("arrive") ? directionFilter(1) : directionFilter(0))
-                .filter(dateFilter.equals("today") ? dateFilter(LocalDate.now()) : (dateFilter.equals("yesterday") ? dateFilter(LocalDate.now().minusDays(1)) : dateFilter(LocalDate.now())))
-                .sorted(sort.equals("time") ? sortByTime : (sort.equals("flightNumber") ? sortByFlightNumber : (sort.equals("waypoint") ? sortByWaypoint : (sort.equals("terminal") ? sortByTerminal : sortByGate))))
+                .filter(dateFilter.equals("today") ? dateFilter(LocalDate.now()) : (dateFilter.equals("yesterday") ? dateFilter(LocalDate.now().minusDays(1)) : dateFilter(LocalDate.now().plusDays(1))))
+                .sorted(sort.equals("time") ? sortByTime : (sort.equals("flightNumber") ? sortByFlightNumber : (sort.equals("waypoint") ? sortByWaypoint : sortByTerminal)))
                 .collect(Collectors.toList());
         request.setAttribute("direction", directionFilter.equals("arrive") ? "arriving" : "leaving");
         request.setAttribute("date", dateFilter.equals("today") ? "today" : (dateFilter.equals("yesterday") ? "yesterday" : "tomorrow"));

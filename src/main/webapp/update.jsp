@@ -42,7 +42,6 @@
             <th>Waypoint</th>
             <th>Terminal</th>
 
-            <th>Gate</th>
             <th>Board ID</th>
 
             <th>Confirm</th>
@@ -53,40 +52,54 @@
         <tr>
             <input type="hidden" name="id" value="${flight.id}">
 
-            <td><label>
-                <input type="date" name="date" value="${flight.date}">
-            </label></td>
-            <td><label>
-                <input type="time" name="time" value="${flight.time}">
-            </label></td>
-            <td><label>
-                <input size="10" name="flightNumber" value="${flight.flightNumber}">
-            </label></td>
+            <td>
+                <label>
+                    <input type="date" name="date" value="${flight.date}">
+                </label>
+            </td>
+            <td>
+                <label>
+                    <input type="time" name="time" value="${flight.time}">
+                </label>
+            </td>
+            <td>
+                <label>
+                    <input size="10" name="flightNumber" value="${flight.flightNumber}">
+                </label>
+            </td>
             <td>
                 <label>
                     <select name="directionType">
-                        <option value="${flight.directionType == 1 ? 1 : 0}">
+                        <option value="${flight.directionType}">
                             ${flight.directionType == 1 ? 'Arriving' : 'Leaving'}
                         </option>
-                        <option value="${flight.directionType == 1 ? 0 : 1}">
-                            ${flight.directionType == 1 ? 'Leaving' : 'Arriving'}
-                        </option>
+                        <option value="1">Arrival</option>
+                        <option value="0">Leaving</option>
                     </select>
                 </label>
             </td>
 
-            <td><label>
-                <input size="10" name="waypoint" value="${flight.waypoint}">
-            </label></td>
-            <td><label>
-                <input size="1" name="terminal" value="${flight.terminal}">
-            </label></td>
-            <td><label>
-                <input type="number" min="1" max="999" name="gate" value="${flight.gate}">
-            </label></td>
-            <td><label>
-                <input type="number" min="1" max="999" name="boardId" value="${flight.boardId}">
-            </label></td>
+            <td>
+                <label>
+                    <input size="10" name="waypoint" value="${flight.waypoint}">
+                </label>
+            </td>
+            <td>
+                <label>
+                    <select name="terminal">
+                        <option value="${flight.terminal}">${flight.terminal}</option>
+                        <option value="A">A</option>
+                        <option value="B">B</option>
+                        <option value="C">C</option>
+                        <option value="D">D</option>
+                    </select>
+                </label>
+            </td>
+            <td>
+                <label>
+                    <input type="number" min="1" max="999" name="boardId" value="${flight.boardId}">
+                </label>
+            </td>
 
             <td>
                 <button name="action" value="update" class="btn btn-primary">

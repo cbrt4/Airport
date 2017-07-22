@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <jsp:useBean id="list" scope="request" type="java.util.List"/>
-<jsp:useBean id="flight" class="entities.FlightEntity"/>
+<jsp:useBean id="flight" scope="request" class="entities.FlightEntity"/>
 <html>
 <head>
     <title>Airport Admin</title>
@@ -70,7 +70,6 @@
         <th>Waypoint</th>
         <th>Terminal</th>
 
-        <th>Gate</th>
         <th>Board ID</th>
 
         <th>Update</th>
@@ -88,7 +87,6 @@
             <td>${flight.waypoint}</td>
             <td>${flight.terminal}</td>
 
-            <td>${flight.gate}</td>
             <td>${flight.boardId}</td>
 
             <td><a href="update?id=${flight.id}" class="btn btn-primary">Update</a></td>
