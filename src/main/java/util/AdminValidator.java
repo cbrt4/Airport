@@ -20,14 +20,6 @@ public class AdminValidator {
         String login = (String) httpSession.getAttribute("login");
         String password = (String) httpSession.getAttribute("password");
 
-        System.out.println("\nLOGIN: " + LOGIN +
-                "\nPASSWORD: " + PASSWORD +
-                "\nlogin: " + login +
-                "\npassword: " + password);
-
-        System.out.println(LOGIN.equals(login));
-        System.out.println(PASSWORD.equals(password));
-
         return LOGIN.equals(login) && PASSWORD.equals(password);
     }
 

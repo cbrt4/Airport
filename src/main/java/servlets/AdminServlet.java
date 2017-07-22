@@ -29,8 +29,8 @@ public class AdminServlet extends HttpServlet {
     private Predicate<FlightEntity> directionFilter(final int directionType) {
         return flightEntity -> flightEntity.getDirectionType() == directionType;
     }
-    private Predicate<FlightEntity> dateFilter(final LocalDate localDate) {
-        return flightEntity -> flightEntity.getDate().equals(localDate);
+    private Predicate<FlightEntity> dateFilter(final LocalDate beginDate, final LocalDate endDate) {
+        return flightEntity -> beginDate.minusDays(1).isBefore(flightEntity.getDate()) && endDate.plusDays(1).isAfter(flightEntity.getDate());
     }
 
     @Override
@@ -49,8 +49,8 @@ public class AdminServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        if (request.getParameter("action").equals("filter") && !request.getParameter("directionType").equals("") && request.getParameter("directionType") != null ||
-                request.getParameter("action").equals("filter") && !request.getParameter("date").equals("") && request.getParameter("date") != null) filter(request, response);
+        if ("filter".equals(request.getParameter("action")) && !"".equals(request.getParameter("directionType")) ||
+                "filter".equals(request.getParameter("action"))) filter(request, response);
         else doGet(request, response);
     }
 
@@ -58,12 +58,13 @@ public class AdminServlet extends HttpServlet {
         List<FlightEntity> flightList = repository.getAll();
 
         String direction = request.getParameter("directionType");
-        String date = request.getParameter("date");
+        String beginDate = request.getParameter("beginDate");
+        String endDate = request.getParameter("endDate");
 
         flightList = flightList
                 .stream()
-                .filter(!direction.equals("") ? directionFilter(Byte.parseByte(direction)) : dateFilter(LocalDate.parse(date)))
-                .filter(!date.equals("") ? dateFilter(LocalDate.parse(date)) : directionFilter(Byte.parseByte(direction)))
+                .filter(!direction.equals("") ? directionFilter(Byte.parseByte(direction)) : dateFilter(LocalDate.parse(beginDate), LocalDate.parse(endDate)))
+                .filter(!(beginDate.equals("") && endDate.equals("")) ? dateFilter(LocalDate.parse(beginDate), LocalDate.parse(endDate)) : directionFilter(Byte.parseByte(direction)))
                 .collect(Collectors.toList());
 
         request.setAttribute("list", flightList);

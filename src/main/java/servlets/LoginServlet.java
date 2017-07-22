@@ -17,13 +17,19 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        if ("logout".equals(request.getParameter("action"))) {
+            HttpSession httpSession = request.getSession();
+            httpSession.setAttribute("login", null);
+            httpSession.setAttribute("password", null);
+        }
         request.getRequestDispatcher("login.jsp").forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession httpSession = request.getSession();
-
+        httpSession.setMaxInactiveInterval(120);
         if ("login".equals(request.getParameter("action"))) {
             httpSession.setAttribute("login", request.getParameter("login"));
             httpSession.setAttribute("password", request.getParameter("password"));

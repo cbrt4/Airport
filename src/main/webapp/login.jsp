@@ -6,27 +6,33 @@
     <link type="text/css" rel="stylesheet" href="<c:url value="/css/bootstrap.min.css"/>"/>
 </head>
 <body>
-<h1 align="center">Provide following details:</h1>
+<h1 align="center">Authorization needed</h1>
+<hr>
 <form action="login" method="post">
-<div align="center">
-    <br>
-    <b>Username: </b>
-    <label>
-        <input name="login">
-    </label>
-    <br>
-    <b>Password: </b>
-    <label>
-        <input type="password" name="password">
-    </label>
-    <br>
-    <button name="action" value="login" class="btn btn-primary">
-        Login
-    </button>
-    <button name="action" value="skip" class="btn btn-danger">
-        Skip
-    </button>
-</div>
+    <p align="center">
+        <b>Username: </b>
+        <label>
+            <input name="login">
+        </label>
+        <br>
+        <b>Password: </b>
+        <label>
+            <input type="password" name="password">
+        </label>
+    </p>
+    <p align="center">
+        <button name="action" value="login" class="btn btn-primary">
+            Login
+        </button>
+        <button name="action" value="skip" class="btn btn-danger">
+            Skip
+        </button>
+    </p>
 </form>
+<hr>
+<p align="center">
+    <a href="info" class="btn btn-default">Back to info</a>
+</p>
+<hr>
 </body>
 </html>

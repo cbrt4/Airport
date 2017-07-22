@@ -1,3 +1,4 @@
+<%@ page import="java.time.LocalDate" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -43,9 +44,14 @@
         </label>
     </p>
     <%--right--%>
-    <p align="center"><b>Date filter: </b>
+    <p align="center">
+        <b>Begin date: </b>
         <label>
-            <input type="date" name="date" value="">
+            <input type="date" name="beginDate" value="<%=LocalDate.now()%>">
+        </label>
+        <b>End date: </b>
+        <label>
+            <input type="date" name="endDate" value="<%=LocalDate.now()%>">
         </label>
     </p>
     <p align="center">
@@ -104,7 +110,8 @@
 <hr>
 
 <p align="center">
-    <a href="info" class="btn btn-danger">Back to info</a>
+    <a href="info" class="btn btn-default">Back to info</a>
+    <a href="login?action=logout" class="btn btn-danger">Logout</a>
 </p>
 
 <hr>
