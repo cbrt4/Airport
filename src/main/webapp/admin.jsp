@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<jsp:useBean id="storage" scope="request" type="java.util.Map"/>
 <jsp:useBean id="list" scope="request" type="java.util.List"/>
 <jsp:useBean id="flight" scope="request" class="entities.FlightEntity"/>
 <html>
@@ -31,14 +32,17 @@
 <body>
 <h1 align="center"><a href="admin">Admin page</a></h1>
 <hr>
-<form action="admin" method="post">
+<form action="admin">
     <%--left--%>
     <p align="center"><b>Direction filter: </b>
         <label>
-            <select name="directionType">
-                <option value="-1">All</option>
-                <option value="0">Arrival</option>
-                <option value="1">Leaving</option>
+            <select name="directionFilter">
+                <option value="${storage.get("directionFilter")}">
+                    ${storage.get("directionFilter") == "all" ? 'All' : (storage.get("directionFilter") == "arrive" ? 'Arrival' : 'Leaving')}
+                </option>
+                <option value="all">All</option>
+                <option value="arrive">Arrival</option>
+                <option value="leave">Leaving</option>
             </select>
         </label>
     </p>
@@ -46,11 +50,11 @@
     <p align="center">
         <b>Begin date: </b>
         <label>
-            <input type="date" name="beginDate" value="">
+            <input type="date" name="beginDate" value="${storage.get("beginDate")}">
         </label>
         <b>End date: </b>
         <label>
-            <input type="date" name="endDate" value="">
+            <input type="date" name="endDate" value="${storage.get("endDate")}">
         </label>
     </p>
     <p align="center">

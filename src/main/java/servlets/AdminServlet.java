@@ -10,6 +10,7 @@ import javax.servlet.http.*;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -18,6 +19,8 @@ import java.util.stream.Collectors;
 public class AdminServlet extends HttpServlet {
 
     private AdminValidator validator = new AdminValidator();
+
+    private HashMap<String, String> filterSortStorage = new HashMap<>(6);
 
     private FlightRepository repository = new FlightRepository();
 
@@ -41,36 +44,41 @@ public class AdminServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         if (!validator.validate(request))
-            request.getRequestDispatcher("login.jsp").forward(request, response);
+            request.getRequestDispatcher("login").forward(request, response);
 
         List<FlightEntity> flightList = repository.getAll();
 
+        filter(request, response);
         if (request.getParameter("sort") != null) sort(request, response);
 
+        request.setAttribute("storage", filterSortStorage);
         request.setAttribute("list", flightList);
         request.getRequestDispatcher("admin.jsp").forward(request, response);
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        if ("filter".equals(request.getParameter("action")) && !"".equals(request.getParameter("directionType")) ||
-                "filter".equals(request.getParameter("action"))) filter(request, response);
-        else doGet(request, response);
     }
 
     private void filter(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<FlightEntity> flightList = repository.getAll();
 
-        String direction = request.getParameter("directionType");
+        String directionFilter = request.getParameter("directionFilter");
+        directionFilter = directionFilter != null ? directionFilter : "all";
+
         String beginDate = request.getParameter("beginDate");
+        beginDate = beginDate != null ? beginDate : LocalDate.now().minusDays(1).toString();
+
         String endDate = request.getParameter("endDate");
+        endDate = endDate != null ? endDate : LocalDate.now().plusDays(1).toString();
+
+        filterSortStorage.put("directionFilter", directionFilter);
+        filterSortStorage.put("beginDate", beginDate);
+        filterSortStorage.put("endDate", endDate);
 
         flightList = flightList
                 .stream()
-                .filter(directionFilter(Byte.parseByte(direction)))
-                .filter(!(beginDate.equals("") && endDate.equals("")) ? dateFilter(LocalDate.parse(beginDate), LocalDate.parse(endDate)) : directionFilter(Byte.parseByte(direction)))
+                .filter(directionFilter.equals("arrive") ? directionFilter(0) : (directionFilter.equals("leave") ? directionFilter(1) : directionFilter(-1)))
+                .filter(!(beginDate.equals("") && endDate.equals("")) ? dateFilter(LocalDate.parse(beginDate), LocalDate.parse(endDate)) : directionFilter(Byte.parseByte(directionFilter)))
                 .collect(Collectors.toList());
 
+        request.setAttribute("storage", filterSortStorage);
         request.setAttribute("list", flightList);
         request.getRequestDispatcher("admin.jsp").forward(request, response);
     }
@@ -79,12 +87,14 @@ public class AdminServlet extends HttpServlet {
         List<FlightEntity> flightList = repository.getAll();
 
         String sort = request.getParameter("sort");
+        filterSortStorage.put("sort", sort);
 
         flightList = flightList
                 .stream()
                 .sorted(sort.equals("date") ? sortByDate : (sort.equals("time") ? sortByTime : (sort.equals("flightNumber") ? sortByFlightNumber : (sort.equals("direction") ? sortByDirection : (sort.equals("waypoint") ? sortByWaypoint : (sort.equals("terminal") ? sortByTerminal : sortByBoard))))))
                 .collect(Collectors.toList());
 
+        request.setAttribute("storage", filterSortStorage);
         request.setAttribute("list", flightList);
         request.getRequestDispatcher("admin.jsp").forward(request, response);
     }
