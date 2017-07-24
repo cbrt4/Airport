@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.time.LocalDate;
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
@@ -29,7 +30,13 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession httpSession = request.getSession();
+
         httpSession.setMaxInactiveInterval(120);
+        httpSession.setAttribute("directionFilter", "all");
+        httpSession.setAttribute("beginDate", LocalDate.now().minusDays(1).toString());
+        httpSession.setAttribute("endDate", LocalDate.now().plusDays(1).toString());
+        httpSession.setAttribute("sort", "id");
+
         if ("login".equals(request.getParameter("action"))) {
             httpSession.setAttribute("login", request.getParameter("login"));
             httpSession.setAttribute("password", request.getParameter("password"));

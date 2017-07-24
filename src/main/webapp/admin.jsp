@@ -56,11 +56,8 @@
         </label>
     </p>
     <p align="center">
-        <button name="action" value="filter" class="btn btn-primary">
-            Confirm
-        </button>
-        <button name="action" value="skip" class="btn btn-danger">
-            Skip all
+        <button class="btn btn-primary">
+            Apply filter
         </button>
     </p>
 </form>
