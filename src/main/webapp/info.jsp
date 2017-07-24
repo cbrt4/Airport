@@ -28,7 +28,7 @@
         }
     </style>
 </head>
-<body style="font-family: 'Noto Sans',serif">
+<body style="font-family: /*'Noto Sans',serif*/'Graphik Medium',sans-serif <%--Graphik Regular,sans-serif--%>">
 <H1 align="center"><a href="info">FLIGHT LIST</a></H1>
 
 <%--FILTERS--%>

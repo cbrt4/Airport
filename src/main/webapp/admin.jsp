@@ -33,7 +33,6 @@
 <h1 align="center"><a href="admin">Admin page</a></h1>
 <hr>
 <form action="admin">
-    <%--left--%>
     <p align="center"><b>Direction filter: </b>
         <label>
             <select name="directionFilter">
@@ -46,7 +45,6 @@
             </select>
         </label>
     </p>
-    <%--right--%>
     <p align="center">
         <b>Begin date: </b>
         <label>
@@ -70,21 +68,23 @@
 <table>
     <thead align="center">
     <tr>
+        <th><a href="admin?sort=id"
+               style="color: white">ID</a></th>
         <th><a href="admin?sort=date"
                style="color: white">Date</a></th>
+
         <th><a href="admin?sort=time"
                style="color: white">Time</a></th>
-
         <th><a href="admin?sort=flightNumber"
                style="color: white">Flight Number</a></th>
+
         <th><a href="admin?sort=direction"
                style="color: white">Direction</a></th>
-
         <th><a href="admin?sort=waypoint"
                style="color: white">Waypoint</a></th>
+
         <th><a href="admin?sort=terminal"
                style="color: white">Terminal</a></th>
-
         <th><a href="admin?sort=board"
                style="color: white">Board ID</a></th>
 
@@ -94,15 +94,16 @@
     </thead>
     <c:forEach var="flight" items="${list}">
         <tr align="center">
+            <td>${flight.id}</td>
             <td>${flight.date}</td>
+
             <td>${flight.time}</td>
-
             <td>${flight.flightNumber}</td>
+
             <td>${flight.directionType == 1 ? 'arrival from' : 'living to'}</td>
-
             <td>${flight.waypoint}</td>
-            <td>${flight.terminal}</td>
 
+            <td>${flight.terminal}</td>
             <td>${flight.boardId}</td>
 
             <td><a href="update?id=${flight.id}" class="btn btn-primary">Update</a></td>

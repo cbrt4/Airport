@@ -26,7 +26,7 @@ public class UpdateServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
 
         if (!validator.validate(request))
-            request.getRequestDispatcher("login.jsp").forward(request, response);
+            request.getRequestDispatcher("login").forward(request, response);
 
         int id = Integer.parseInt(request.getParameter("id"));
 
