@@ -31,6 +31,7 @@ public class AdminServlet extends HttpServlet {
     private Comparator<FlightEntity> sortByDirection = Comparator.comparing(FlightEntity::getDirectionType);
     private Comparator<FlightEntity> sortByWaypoint = Comparator.comparing(FlightEntity::getWaypoint);
     private Comparator<FlightEntity> sortByTerminal = Comparator.comparing(FlightEntity::getTerminal);
+    private Comparator<FlightEntity> sortByGate = Comparator.comparing(FlightEntity::getGate);
     private Comparator<FlightEntity> sortByBoard = Comparator.comparing(FlightEntity::getBoardId);
 
 
@@ -61,16 +62,20 @@ public class AdminServlet extends HttpServlet {
         HttpSession httpSession = request.getSession();
 
         String directionFilter = request.getParameter("directionFilter");
-        directionFilter = directionFilter != null && !directionFilter.equals("") ? directionFilter : (String) httpSession.getAttribute("directionFilter");
+        directionFilter = directionFilter != null && !directionFilter.equals("") ? directionFilter :
+                (String) httpSession.getAttribute("directionFilter");
 
         String beginDate = request.getParameter("beginDate");
-        beginDate = beginDate != null && !beginDate.equals("") ? beginDate : (String) httpSession.getAttribute("beginDate");
+        beginDate = beginDate != null && !beginDate.equals("") ? beginDate :
+                (String) httpSession.getAttribute("beginDate");
 
         String endDate = request.getParameter("endDate");
-        endDate = endDate != null && !endDate.equals("") ? endDate : (String) httpSession.getAttribute("endDate");
+        endDate = endDate != null && !endDate.equals("") ? endDate :
+                (String) httpSession.getAttribute("endDate");
 
         String sort = request.getParameter("sort");
-        sort = sort != null && !sort.equals("") ? sort : (String) httpSession.getAttribute("sort");
+        sort = sort != null && !sort.equals("") ? sort :
+                (String) httpSession.getAttribute("sort");
 
         filterSortStorage.put("directionFilter", directionFilter);
         filterSortStorage.put("beginDate", beginDate);
@@ -84,9 +89,19 @@ public class AdminServlet extends HttpServlet {
 
         flightList = flightList
                 .stream()
-                .filter(directionFilter.equals("arrive") ? directionFilter(0) : (directionFilter.equals("leave") ? directionFilter(1) : directionFilter(-1)))
+                .filter(directionFilter.equals("arrive") ? directionFilter(0) :
+                        (directionFilter.equals("leave") ? directionFilter(1) :
+                                directionFilter(-1)))
                 .filter(dateFilter(LocalDate.parse(beginDate), LocalDate.parse(endDate)))
-                .sorted(sort.equals("id") ? sortById : (sort.equals("date") ? sortByDate : (sort.equals("time") ? sortByTime : (sort.equals("flightNumber") ? sortByFlightNumber : (sort.equals("direction") ? sortByDirection : (sort.equals("waypoint") ? sortByWaypoint : (sort.equals("terminal") ? sortByTerminal : sortByBoard)))))))
+                .sorted(sort.equals("id") ? sortById :
+                        (sort.equals("date") ? sortByDate :
+                                (sort.equals("time") ? sortByTime :
+                                        (sort.equals("flightNumber") ? sortByFlightNumber :
+                                                (sort.equals("direction") ? sortByDirection :
+                                                        (sort.equals("waypoint") ? sortByWaypoint :
+                                                                (sort.equals("terminal") ? sortByTerminal :
+                                                                        (sort.equals("gate") ? sortByGate :
+                                                                                sortByBoard))))))))
                 .collect(Collectors.toList());
 
         request.setAttribute("storage", filterSortStorage);

@@ -1,33 +1,27 @@
 package util;
 
+import repository.AdminRepository;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.Properties;
 
 public class AdminValidator {
 
-    private final String CONFIG_PATH = "/admin.properties";
-    private String LOGIN;
-    private String PASSWORD;
+    private AdminRepository repository = new AdminRepository();
 
     public boolean validate(HttpServletRequest request) throws ServletException, IOException {
         HttpSession httpSession = request.getSession();
 
-        initProperties(CONFIG_PATH);
+        final boolean[] isValid = {false};
 
-        String login = (String) httpSession.getAttribute("login");
-        String password = (String) httpSession.getAttribute("password");
+        repository.getAll().forEach(adminEntity -> {
+            if (adminEntity.getLogin().equals(httpSession.getAttribute("login")) &&
+                    adminEntity.getPassword().equals(httpSession.getAttribute("password")))
+                isValid[0] = true;
+        });
 
-        return LOGIN.equals(login) && PASSWORD.equals(password);
-    }
-
-    private void initProperties(String configPath) throws IOException {
-        Properties properties = new Properties();
-        properties.load(getClass().getResourceAsStream(configPath));
-
-        LOGIN = properties.getProperty("login");
-        PASSWORD = properties.getProperty("password");
+        return isValid[0];
     }
 }

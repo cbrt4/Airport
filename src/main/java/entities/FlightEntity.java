@@ -8,13 +8,14 @@ import java.time.LocalTime;
 @Table(name = "flight", schema = "airport")
 public class FlightEntity {
 
+    private int id;
     private LocalDate date;
     private LocalTime time;
-    private int id;
     private String flightNumber;
     private byte directionType;
     private String waypoint;
     private String terminal;
+    private int gate;
     private int boardId;
 
     @Id
@@ -88,6 +89,16 @@ public class FlightEntity {
     }
 
     @Basic
+    @Column(name = "gate")
+    public int getGate() {
+        return gate;
+    }
+
+    public void setGate(int gate) {
+        this.gate = gate;
+    }
+
+    @Basic
     @Column(name = "boardId")
     public int getBoardId() {
         return boardId;
@@ -107,6 +118,7 @@ public class FlightEntity {
         if (getId() != that.getId()) return false;
         if (getDirectionType() != that.getDirectionType()) return false;
         if (getBoardId() != that.getBoardId()) return false;
+        if (getGate() != that.getGate()) return false;
         if (!getDate().equals(that.getDate())) return false;
         if (!getTime().equals(that.getTime())) return false;
         if (!getFlightNumber().equals(that.getFlightNumber())) return false;
@@ -123,6 +135,7 @@ public class FlightEntity {
         result = 31 * result + (int) getDirectionType();
         result = 31 * result + getWaypoint().hashCode();
         result = 31 * result + getTerminal().hashCode();
+        result = 31 * result + getGate();
         result = 31 * result + getBoardId();
         return result;
     }
@@ -136,6 +149,7 @@ public class FlightEntity {
                 "\ndirectionType: " + directionType +
                 "\nwaypoint: " + waypoint +
                 "\nterminal: " + terminal +
+                "\ngate: " + gate +
                 "\nboardId: " + boardId;
     }
 }

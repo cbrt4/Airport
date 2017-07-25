@@ -7,7 +7,6 @@ import util.SessionFactoryUtil;
 
 import java.util.List;
 
-@Repository
 public class FlightRepository implements RepositoryInterface<FlightEntity> {
 
     @Override
@@ -32,9 +31,10 @@ public class FlightRepository implements RepositoryInterface<FlightEntity> {
     }
 
     @Override
-    public void update(final FlightEntity flightEntity) {
+    public void update(final int id) {
         SessionFactoryUtil.transaction((Session session) -> {
-            session.update(flightEntity);
+            FlightEntity flightEntity = get(id);
+            session.update(id);
             return flightEntity;
         });
     }
@@ -42,6 +42,6 @@ public class FlightRepository implements RepositoryInterface<FlightEntity> {
     @Override
     public List<FlightEntity> getAll() {
         return SessionFactoryUtil.transaction((Session session) ->
-                session.createQuery("from FlightEntity ").list());
+                session.createQuery("from FlightEntity").list());
     }
 }

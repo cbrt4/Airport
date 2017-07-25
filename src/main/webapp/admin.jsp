@@ -33,7 +33,8 @@
 <h1 align="center"><a href="admin">Admin page</a></h1>
 <hr>
 <form action="admin">
-    <p align="center"><b>Direction filter: </b>
+    <p align="center">
+        <b>Direction filter: </b>
         <label>
             <select name="directionFilter">
                 <option value="${storage.get("directionFilter")}">
@@ -82,6 +83,9 @@
 
         <th><a href="admin?sort=terminal"
                style="color: white">Terminal</a></th>
+        <th><a href="admin?sort=gate"
+               style="color: white">Gate</a></th>
+
         <th><a href="admin?sort=board"
                style="color: white">Board ID</a></th>
 
@@ -101,6 +105,8 @@
             <td>${flight.waypoint}</td>
 
             <td>${flight.terminal}</td>
+            <td>${flight.gate}</td>
+
             <td>${flight.boardId}</td>
 
             <td><a href="update?id=${flight.id}" class="btn btn-primary">Update</a></td>
@@ -119,6 +125,7 @@
 
 <p align="center">
     <a href="info" class="btn btn-default">Back to info</a>
+    <a href="change-password" class="btn btn-primary">Change password</a>
     <a href="login?action=logout" class="btn btn-danger">Logout</a>
 </p>
 

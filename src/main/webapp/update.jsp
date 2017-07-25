@@ -42,6 +42,7 @@
             <th>Waypoint</th>
             <th>Terminal</th>
 
+            <th>Gate</th>
             <th>Board ID</th>
 
             <th>Confirm</th>
@@ -93,6 +94,11 @@
                         <option value="C">C</option>
                         <option value="D">D</option>
                     </select>
+                </label>
+            </td>
+            <td>
+                <label>
+                    <input type="number" min="1" max="999" name="gate" value="${flight.gate}">
                 </label>
             </td>
             <td>

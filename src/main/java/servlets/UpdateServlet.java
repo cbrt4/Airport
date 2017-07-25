@@ -45,6 +45,7 @@ public class UpdateServlet extends HttpServlet {
                 !Objects.equals(request.getParameter("directionType"), "") &&
                 !Objects.equals(request.getParameter("waypoint"), "") &&
                 !Objects.equals(request.getParameter("terminal"), "") &&
+                !Objects.equals(request.getParameter("gate"), "") &&
                 !Objects.equals(request.getParameter("boardId"), "")) {
 
             FlightEntity flightEntity = new FlightEntity();
@@ -56,9 +57,10 @@ public class UpdateServlet extends HttpServlet {
             flightEntity.setDirectionType(Byte.parseByte(request.getParameter("directionType")));
             flightEntity.setWaypoint(request.getParameter("waypoint"));
             flightEntity.setTerminal(request.getParameter("terminal"));
+            flightEntity.setGate(Integer.parseInt(request.getParameter("gate")));
             flightEntity.setBoardId(Integer.parseInt(request.getParameter("boardId")));
 
-            repository.update(flightEntity);
+            repository.update(Integer.parseInt(request.getParameter("id")));
         } else doGet(request, response);
 
         response.sendRedirect("admin");

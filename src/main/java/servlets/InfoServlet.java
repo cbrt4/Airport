@@ -27,6 +27,7 @@ public class InfoServlet extends HttpServlet {
     private Comparator<FlightEntity> sortByFlightNumber = Comparator.comparing(FlightEntity::getFlightNumber);
     private Comparator<FlightEntity> sortByWaypoint = Comparator.comparing(FlightEntity::getWaypoint);
     private Comparator<FlightEntity> sortByTerminal = Comparator.comparing(FlightEntity::getTerminal);
+    private Comparator<FlightEntity> sortByGate = Comparator.comparing(FlightEntity::getGate);
 
     private Predicate<FlightEntity> directionFilter(final int directionType) {
         return flightEntity -> flightEntity.getDirectionType() == directionType;
@@ -67,9 +68,15 @@ public class InfoServlet extends HttpServlet {
 
         flightList = flightList
                 .stream()
-                .filter(directionFilter.equals("arrive") ? directionFilter(1) : directionFilter(0))
-                .filter(dateFilter.equals("today") ? dateFilter(LocalDate.now()) : (dateFilter.equals("yesterday") ? dateFilter(LocalDate.now().minusDays(1)) : dateFilter(LocalDate.now().plusDays(1))))
-                .sorted(sort.equals("time") ? sortByTime : (sort.equals("flightNumber") ? sortByFlightNumber : (sort.equals("waypoint") ? sortByWaypoint : sortByTerminal)))
+                .filter(directionFilter.equals("arrive") ? directionFilter(1) :
+                        directionFilter(0))
+                .filter(dateFilter.equals("today") ? dateFilter(LocalDate.now()) :
+                        (dateFilter.equals("yesterday") ? dateFilter(LocalDate.now().minusDays(1)) :
+                                dateFilter(LocalDate.now().plusDays(1))))
+                .sorted(sort.equals("time") ? sortByTime : (sort.equals("flightNumber") ? sortByFlightNumber :
+                        (sort.equals("waypoint") ? sortByWaypoint :
+                                (sort.equals("gate") ? sortByGate :
+                                        sortByTerminal))))
                 .collect(Collectors.toList());
 
         request.setAttribute("storage", filterSortStorage);

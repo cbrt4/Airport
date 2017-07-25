@@ -31,32 +31,35 @@
 <body style="font-family: /*'Noto Sans',serif*/'Graphik Medium',sans-serif <%--Graphik Regular,sans-serif--%>">
 <H1 align="center"><a href="info">FLIGHT LIST</a></H1>
 
-<%--FILTERS--%>
-
 <hr>
-
+<%--FILTERS--%>
 <p align="center">
     <a href="info?directionFilter=${storage.get("directionFilter") == "leave" ? 'leave' : 'arrive'}&dateFilter=yesterday"
-       class="${storage.get("dateFilter") == "yesterday" ? 'btn btn-primary' : 'btn btn-default'}">
+       class="${storage.get("dateFilter") == "yesterday" ? 'btn btn-primary' : 'btn btn-default'}"
+       style="width: 75pt">
         Yesterday
     </a>
     <a href="info?directionFilter=${storage.get("directionFilter") == "leave" ? 'leave' : 'arrive'}&dateFilter=today"
-       class="${storage.get("dateFilter") == "today" ? 'btn btn-primary' : 'btn btn-default'}">
+       class="${storage.get("dateFilter") == "today" ? 'btn btn-primary' : 'btn btn-default'}"
+       style="width: 75pt">
         Today
     </a>
     <a href="info?directionFilter=${storage.get("directionFilter") == "leave" ? 'leave' : 'arrive'}&dateFilter=tomorrow"
-       class="${storage.get("dateFilter") == "tomorrow" ? 'btn btn-primary' : 'btn btn-default'}">
+       class="${storage.get("dateFilter") == "tomorrow" ? 'btn btn-primary' : 'btn btn-default'}"
+       style="width: 75pt">
         Tomorrow
     </a>
 </p>
 
 <p align="center">
     <a href="info?directionFilter=arrive&dateFilter=${storage.get("dateFilter") == "today" ? 'today' : (storage.get("dateFilter") == "yesterday" ? 'yesterday' : 'tomorrow')}"
-       class="${storage.get("directionFilter") == "arrive" ? 'btn btn-primary' : 'btn btn-default'}">
+       class="${storage.get("directionFilter") == "arrive" ? 'btn btn-primary' : 'btn btn-default'}"
+       style="width: 75pt">
         Arriving
     </a>
     <a href="info?directionFilter=leave&dateFilter=${storage.get("dateFilter") == "today" ? 'today' : (storage.get("dateFilter") == "yesterday" ? 'yesterday' : 'tomorrow')}"
-       class="${storage.get("directionFilter") == "leave" ? 'btn btn-primary' : 'btn btn-default'}">
+       class="${storage.get("directionFilter") == "leave" ? 'btn btn-primary' : 'btn btn-default'}"
+       style="width: 75pt">
         Leaving
     </a>
 </p>
@@ -82,6 +85,10 @@
                 <a href="info?directionFilter=${storage.get("directionFilter") == "leave" ? 'leave' : 'arrive'}&dateFilter=${storage.get("dateFilter") == "today" ? 'today' : (storage.get("dateFilter") == "yesterday" ? 'yesterday' : 'tomorrow')}&sort=terminal"
                    style="color: white">Terminal</a>
             </th>
+            <th>
+                <a href="info?directionFilter=${storage.get("directionFilter") == "leave" ? 'leave' : 'arrive'}&dateFilter=${storage.get("dateFilter") == "today" ? 'today' : (storage.get("dateFilter") == "yesterday" ? 'yesterday' : 'tomorrow')}&sort=gate"
+                   style="color: white">Gate</a>
+            </th>
         </tr>
     </thead>
 
@@ -91,6 +98,7 @@
             <td>${flight.flightNumber}</td>
             <td><b>${flight.waypoint}</b></td>
             <td>${flight.terminal}</td>
+            <td>${flight.gate}</td>
         </tr>
     </c:forEach>
 </table>
@@ -98,7 +106,7 @@
 <hr>
 
 <p align="center">
-    <a href="admin" class="btn btn-default">Admin page</a>
+    <a href="admin" class="btn btn-default" style="width: 75pt">Admin page</a>
 </p>
 
 <hr>

@@ -41,6 +41,7 @@
             <th>Waypoint</th>
             <th>Terminal</th>
 
+            <th>Gate</th>
             <th>Board ID</th>
 
             <th>Confirm</th>
@@ -88,6 +89,11 @@
                     </select>
                 </label>
             </td>
+            <td>
+                <label>
+                    <input type="number" min="1" max="999" name="gate" value="">
+                </label>
+            </td
             <td>
                 <label>
                     <input type="number" min="1" max="999" name="boardId" value="">
