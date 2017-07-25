@@ -76,7 +76,7 @@
             </th>
             <th>
                 <a href="info?directionFilter=${storage.get("directionFilter") == "leave" ? 'leave' : 'arrive'}&dateFilter=${storage.get("dateFilter") == "today" ? 'today' : (storage.get("dateFilter") == "yesterday" ? 'yesterday' : 'tomorrow')}&sort=waypoint"
-                   style="color: white">${storage.get("directionFilter") == "leaving" ? 'Destination' : 'Departure'}</a>
+                   style="color: white">${storage.get("directionFilter") == "leave" ? 'Destination' : 'Departure'}</a>
             </th>
             <th>
                 <a href="info?directionFilter=${storage.get("directionFilter") == "leave" ? 'leave' : 'arrive'}&dateFilter=${storage.get("dateFilter") == "today" ? 'today' : (storage.get("dateFilter") == "yesterday" ? 'yesterday' : 'tomorrow')}&sort=terminal"

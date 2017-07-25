@@ -21,8 +21,8 @@ public class LoginServlet extends HttpServlet {
 
         if ("logout".equals(request.getParameter("action"))) {
             HttpSession httpSession = request.getSession();
-            httpSession.setAttribute("login", null);
-            httpSession.setAttribute("password", null);
+            httpSession.removeAttribute("login");
+            httpSession.removeAttribute("password");
         }
         request.getRequestDispatcher("login.jsp").forward(request, response);
     }
