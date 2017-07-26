@@ -29,16 +29,6 @@ public class ChangePasswordServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession httpSession = request.getSession();
-//TODO
-        System.out.println("oldLogin: " + request.getParameter("oldLogin"));
-        System.out.println("oldPassword: " + request.getParameter("oldPassword"));
-        System.out.println("newLogin: " + request.getParameter("newLogin"));
-        System.out.println("newPassword: " + request.getParameter("newPassword"));
-        System.out.println("newPasswordConfirm: " + request.getParameter("newPasswordConfirm"));
-        System.out.println("change".equals(request.getParameter("action")) &&
-                httpSession.getAttribute("login").equals(request.getParameter("oldLogin")) &&
-                httpSession.getAttribute("password").equals(request.getParameter("oldPassword")) &&
-                request.getParameter("newPassword").equals(request.getParameter("newPasswordConfirm")));
 
         if ("change".equals(request.getParameter("action")) &&
                 httpSession.getAttribute("login").equals(request.getParameter("oldLogin")) &&

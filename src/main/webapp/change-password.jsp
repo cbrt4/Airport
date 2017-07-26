@@ -73,7 +73,7 @@
 </form>
 <hr>
 <p align="center">
-    <a href="info" class="btn btn-default">Back to info</a>
+    <a href="admin" class="btn btn-default">Back to admin</a>
 </p>
 <hr>
 </body>

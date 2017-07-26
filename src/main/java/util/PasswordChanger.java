@@ -17,7 +17,6 @@ public class PasswordChanger {
                 adminEntity.getPassword().equals(request.getParameter("oldPassword"))) {
             adminEntity.setLogin(request.getParameter("newLogin"));
             adminEntity.setPassword(request.getParameter("newPassword"));
-            System.out.println(adminEntity);
             repository.update(adminEntity);
             }
         });
