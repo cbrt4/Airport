@@ -10,7 +10,7 @@ public interface RepositoryInterface<T> {
 
     void remove(int id);
 
-    void update(int id);
+    void update(T entity);
 
     List<T> getAll();
 

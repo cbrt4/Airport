@@ -93,7 +93,7 @@
                 <label>
                     <input type="number" min="1" max="999" name="gate" value="">
                 </label>
-            </td
+            </td>
             <td>
                 <label>
                     <input type="number" min="1" max="999" name="boardId" value="">

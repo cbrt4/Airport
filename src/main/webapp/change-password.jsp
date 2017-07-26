@@ -19,7 +19,7 @@
 <body>
 <h1 align="center">Provide following details</h1>
 <hr>
-<form action="login" method="post">
+<form action="change-password" method="post">
     <table>
         <tr align="center">
             <td><b>Old username: </b></td>

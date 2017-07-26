@@ -33,29 +33,39 @@
 <h1 align="center"><a href="admin">Admin page</a></h1>
 <hr>
 <form action="admin">
-    <p align="center">
-        <b>Direction filter: </b>
-        <label>
-            <select name="directionFilter">
-                <option value="${storage.get("directionFilter")}">
-                    ${storage.get("directionFilter") == "all" ? 'All' : (storage.get("directionFilter") == "arrive" ? 'Arrival' : 'Leaving')}
-                </option>
-                <option value="all">All</option>
-                <option value="arrive">Arrival</option>
-                <option value="leave">Leaving</option>
-            </select>
-        </label>
-    </p>
-    <p align="center">
-        <b>Begin date: </b>
-        <label>
-            <input type="date" name="beginDate" value="${storage.get("beginDate")}">
-        </label>
-        <b>End date: </b>
-        <label>
-            <input type="date" name="endDate" value="${storage.get("endDate")}">
-        </label>
-    </p>
+    <table>
+        <tr style="background-color: white">
+            <td><b>Direction:</b></td>
+            <td>
+                <label>
+                    <select name="directionFilter">
+                        <option value="${storage.get("directionFilter")}">
+                            ${storage.get("directionFilter") == "all" ? 'All' : (storage.get("directionFilter") == "arrive" ? 'Arrival' : 'Leaving')}
+                        </option>
+                        <option value="all">All</option>
+                        <option value="arrive">Arrival</option>
+                        <option value="leave">Leaving</option>
+                    </select>
+                </label>
+            </td>
+        </tr>
+        <tr style="background-color: white">
+            <td><b>Begin date:</b></td>
+            <td>
+                <label>
+                    <input type="date" name="beginDate" value="${storage.get("beginDate")}">
+                </label>
+            </td>
+        </tr>
+        <tr style="background-color: white">
+            <td><b>End date:</b></td>
+            <td>
+                <label>
+                    <input type="date" name="endDate" value="${storage.get("endDate")}">
+                </label>
+            </td>
+        </tr>
+    </table>
     <p align="center">
         <button class="btn btn-primary">
             Apply filter
@@ -119,12 +129,12 @@
 
 <p align="center">
     <a href="add" class="btn btn-primary">Add new flight</a>
+    <a href="info" class="btn btn-default">Back to info</a>
 </p>
 
 <hr>
 
 <p align="center">
-    <a href="info" class="btn btn-default">Back to info</a>
     <a href="change-password" class="btn btn-primary">Change password</a>
     <a href="login?action=logout" class="btn btn-danger">Logout</a>
 </p>

@@ -31,10 +31,9 @@ public class FlightRepository implements RepositoryInterface<FlightEntity> {
     }
 
     @Override
-    public void update(final int id) {
+    public void update(final FlightEntity flightEntity) {
         SessionFactoryUtil.transaction((Session session) -> {
-            FlightEntity flightEntity = get(id);
-            session.update(id);
+            session.update(flightEntity);
             return flightEntity;
         });
     }

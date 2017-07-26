@@ -9,13 +9,13 @@ import java.util.List;
 
 public class AdminRepository implements RepositoryInterface<AdminEntity> {
     @Override
-    public AdminEntity get(int id) {
+    public AdminEntity get(final int id) {
         return SessionFactoryUtil.transaction((Session session) ->
                 session.get(AdminEntity.class, id));
     }
 
     @Override
-    public void add(AdminEntity adminEntity) {
+    public void add(final AdminEntity adminEntity) {
         SessionFactoryUtil.transaction((Session session) ->
                 session.save(adminEntity));
     }
@@ -30,10 +30,9 @@ public class AdminRepository implements RepositoryInterface<AdminEntity> {
     }
 
     @Override
-    public void update(int id) {
+    public void update(final AdminEntity adminEntity) {
         SessionFactoryUtil.transaction((Session session) -> {
-            AdminEntity adminEntity = get(id);
-            session.update(id);
+            session.update(adminEntity);
             return adminEntity;
         });
     }

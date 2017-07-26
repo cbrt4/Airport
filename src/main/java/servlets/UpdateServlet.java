@@ -60,7 +60,7 @@ public class UpdateServlet extends HttpServlet {
             flightEntity.setGate(Integer.parseInt(request.getParameter("gate")));
             flightEntity.setBoardId(Integer.parseInt(request.getParameter("boardId")));
 
-            repository.update(Integer.parseInt(request.getParameter("id")));
+            repository.update(flightEntity);
         } else doGet(request, response);
 
         response.sendRedirect("admin");
