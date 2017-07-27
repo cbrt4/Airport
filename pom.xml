@@ -40,7 +40,16 @@
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
-            <version>3.1.0</version>
+            <version>4.0.0-b07</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!--JSP-->
+        <dependency>
+            <groupId>javax.servlet.jsp</groupId>
+            <artifactId>javax.servlet.jsp-api</artifactId>
+            <version>2.3.2-b02</version>
+            <scope>provided</scope>
         </dependency>
 
         <!--JSTL-->
@@ -51,11 +60,11 @@
         </dependency>
 
         <!--JSF-->
-        <dependency>
+        <!--<dependency>
             <groupId>javax.faces</groupId>
             <artifactId>javax.faces-api</artifactId>
             <version>2.3</version>
-        </dependency>
+        </dependency>-->
 
         <!--Hibernate-->
         <dependency>
@@ -70,7 +79,7 @@
         </dependency>
 
         <!--Spring-->
-        <dependency>
+        <!--<dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
             <version>4.3.8.RELEASE</version>
@@ -79,7 +88,7 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-core</artifactId>
             <version>4.3.8.RELEASE</version>
-        </dependency>
+        </dependency>-->
 
     </dependencies>
 </project>

@@ -2,7 +2,6 @@ package repository;
 
 import entities.FlightEntity;
 import org.hibernate.Session;
-import org.springframework.stereotype.Repository;
 import util.SessionFactoryUtil;
 
 import java.util.List;
